@@ -1,0 +1,83 @@
+
+.term_window {
+    border-radius: 2%;
+    background-color: #282c34;
+    border: 3px solid #fff;
+    min-width: 35%;
+    color: green;
+    font-family: 'Courier New', Courier, monospace;
+    overflow: scroll;  
+    cursor: move; /* Indicate that the top bar is draggable */
+       
+}
+
+.term_content {
+    min-height: 30vh;
+    cursor: default;
+}
+
+.term_bar {
+    display: flex;
+    background-color: rgb(209, 211, 219);
+    padding-inline: 3%;
+   align-items: center;
+    max-height: 55px;
+}
+
+.bar_header {
+    text-align: center;
+    align-items: center;
+    width: 85%;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    width: 15%;
+    cursor:default 
+  }
+
+.bar_button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 3px;
+    margin-left: 3px;
+  }
+
+.close {
+    background-color: #ff5f56;
+  }
+  
+  .minimize {
+    background-color: #ffbd2e;
+  }
+  
+  .disabled {
+    background-color: #838281;
+    pointer-events: none;
+  }
+
+  .maximize {
+    background-color: #27c93f;
+  }
+
+  .input {
+    width: 95%;
+    background: #282c34;
+    color: green;
+    border: none;
+    outline: none;
+    font-family: 'Courier New', Courier, monospace;
+   
+  }
+
+.prompt_line{
+    display: flex;
+    padding-inline: 1%;
+}
+
+.output_line{
+    display: flex;
+    padding-inline: 1%;
+}
