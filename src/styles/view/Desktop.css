@@ -2,12 +2,13 @@
     position: absolute;
     display: flex;
     align-items: self-start;
+    flex-wrap: wrap;
     justify-content: left;
     border: 2px solid #252344;
     background: linear-gradient(45deg, #d14114, #77116f, #512750, #2a001e, #5e2750, #77216f);
     width: 99vw;
     height: 99vh;
-    z-index: 1;
+    z-index: 0;
 }
 
 .desktop_folder {

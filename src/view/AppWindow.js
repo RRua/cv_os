@@ -35,7 +35,7 @@ function AppWindow({onWindowClose, children}) {
   
     return(
         <Draggable handle=".term_window" cancel=".term_bar .bar_button" >
-            <div className="term_window" style={isMaximized && {height: '99%', width:'99%'}} onClick={handleContainerClick}>
+            <div className="term_window" style={isMaximized && {height: '99vh', width:'99vw'}} onClick={handleContainerClick}>
                 <WindowAppBar text="Terminal CV" 
                     onMinimize={toggleMinimize}
                     onMaximize={toggleMaximize}

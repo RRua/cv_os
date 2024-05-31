@@ -5,6 +5,7 @@
     border: 3px solid #fff;
     min-width: 35%;
     color: green;
+    margin: 2px;
     font-family: 'Courier New', Courier, monospace;
     overflow: scroll;  
     cursor: move; /* Indicate that the top bar is draggable */
@@ -13,6 +14,7 @@
 
 .term_content {
     min-height: 30vh;
+    width: 30vw;
     cursor: default;
 }
 
