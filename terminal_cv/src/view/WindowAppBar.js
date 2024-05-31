@@ -1,7 +1,8 @@
 import '../styles/view/TerminalWindowFrame.css';
 
 
-function TerminalBar({text, isMaximized, onClose, onMinimize, onMaximize}) {
+function WindowAppBar({text, isMaximized, onClose, onMinimize, onMaximize}) {
+    
     return(
         <div className="term_bar">
             <div className="buttons">
@@ -15,5 +16,5 @@ function TerminalBar({text, isMaximized, onClose, onMinimize, onMaximize}) {
     )    
 }
 
-export default TerminalBar;
+export default WindowAppBar;
 

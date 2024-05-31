@@ -1,0 +1,14 @@
+/* OpenWindowsSpace.css */
+
+.open-windows-space {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 99vh;
+    width: 99vw;
+    border: 2px solid #e95d5d;
+    background: none;
+    z-index: 2;
+}
