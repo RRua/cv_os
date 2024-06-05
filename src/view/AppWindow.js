@@ -5,7 +5,7 @@ import React, { useState, useRef, cloneElement } from 'react';
 import Draggable from 'react-draggable';
 
 
-function AppWindow({onWindowClose, children}) {
+function AppWindow({title, onWindowClose, children}) {
     const [isMinimized, setIsMinimized] = useState(false);
     const [isMaximized, setIsMaximized] = useState(false);
     const inputRef = useRef(null);
@@ -34,9 +34,10 @@ function AppWindow({onWindowClose, children}) {
     )
   
     return(
-        <Draggable handle=".term_window" cancel=".term_bar .bar_button" >
+        
+        <Draggable handle=".term_window" cancel=".bar_button .term_content .file_line" >
             <div className="term_window" style={isMaximized && {height: '99vh', width:'99vw'}} onClick={handleContainerClick}>
-                <WindowAppBar text="Terminal CV" 
+                <WindowAppBar title={title} 
                     onMinimize={toggleMinimize}
                     onMaximize={toggleMaximize}
                     onClose={onWindowClose}

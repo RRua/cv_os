@@ -1,0 +1,34 @@
+[
+    {
+        "title": "A large-scale empirical study on mobile performance: energy, run-time and memory",
+        "filename": "LargeScale_2023_EMSE.pdf",
+        "authors": ["Rui Rua", "João Saraiva"],
+        "year": 2023,
+        "issue_date": "Jan 2024",
+        "publisher": "Kluwer Academic Publishers",
+        "address": "USA",
+        "volume": 29,
+        "number": 1,
+        "issn": "1382-3256",
+        "url": "https://doi.org/10.1007/s10664-023-10391-y",
+        "doi": "10.1007/s10664-023-10391-y",
+        "journal": "Empirical Softw. Engg.",
+        "month": "dec",
+        "numpages": 56,
+        "keywords": ["Performance", "Empirical", "Mobile", "Testing"]
+    },
+    {   "title": "E-MANAFA: Energy Monitoring and ANAlysis tool For Android",
+        "filename": "E-MANAFA_2022_ASE.pdf",
+        "authors": ["Rui Rua", "João Saraiva"],
+        "year": 2022,
+        "isbn": "9781450394758",
+        "publisher": "Association for Computing Machinery",
+        "address": "New York, NY, USA",
+        "url": "https://doi.org/10.1145/3551349.3561342",
+        "doi": "10.1145/3551349.3561342",
+        "booktitle": "Proceedings of the 37th IEEE/ACM International Conference on Automated Software Engineering",
+        "articleno": "202",
+        "numpages": "4",
+        "series": "ASE '22"
+    }
+]

@@ -1,29 +1,33 @@
 import '../styles/view/Desktop.css';
-import DesktopFolder from './DesktopFolder';
+import DesktopIcon from './DesktopIcon';
+import TerminalApp from './TerminalApp';
+import AppFolder from './AppFolder';
+import ReadOnlyTextFileApp from './ReadOnlyTextFileApp';
 
-function DesktopArea() {
+function DesktopArea({onAppOpen, data}) {
 
-    const default_folders = [
-        {   src: require('../assets/folder-icon.png'),
-            alt: 'Publications',
-        },
-        {   src: require('../assets/folder-icon.png'),
-            alt: 'Projects',
-        },
-        {   src: require('../assets/folder-icon.png'),
-        alt: 'Batata',
-        },
-        {   src: require('../assets/folder-icon.png'),
-            alt: 'Tremoco',
-        },
-
-      ];
+    const data_to_icon = (key, value) => { 
+        if (Array.isArray(value)) {
+            return {   
+                icon_type: 'folder',
+                name: key,
+                onclick: () => { onAppOpen(key, key, <AppFolder name={key} openApp={onAppOpen} data={value}/>) }
+            }
+        } 
+        else {
+            return {   
+                icon_type: 'file',
+                name: key,
+                onclick: () => { onAppOpen(key, key, <ReadOnlyTextFileApp content={value}/>) }
+            }
+        }
+    }
     
     return(
         <div className="desktop">
-            {default_folders.map((folder, index) => (
-                <DesktopFolder key={index} folder={folder}/>
-            ))}
+           {Object.keys(data).map(key => {
+                return <DesktopIcon key={1} icon={data_to_icon(key, data[key])}/>
+})}
         </div>
     )    
 }

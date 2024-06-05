@@ -1,0 +1,68 @@
+
+
+.folder_content {
+    min-height: 35vh;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: left;
+    border: 2px solid #d1d0e5;
+    max-height: 100vh;
+    padding: 1%;
+    overflow: scroll;
+    scrollbar-color: #ffff #fff;
+    background-color: #f1e9e9;
+    box-sizing: border-box;
+    height: 100%;
+    
+}
+
+.folder_entry_linear {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    align-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    padding: 0.5%;
+    width: 100%;
+    
+}
+
+.folder_entry_linear img { 
+    min-width: 20px;
+    min-height: 20px;
+    height: 3vh;
+    width: 3vh;
+    cursor: pointer;
+  }
+  
+  .folder_entry_linear p { 
+    max-width: 90%;
+    padding: 5px;
+    text-align: center;
+    word-break: keep-all;
+    transition: transform 0.3s;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;     
+    text-overflow: ellipsis; 
+  }
+
+
+.line_tooltip {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  width: fit-content;
+}

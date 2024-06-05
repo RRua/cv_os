@@ -1,0 +1,36 @@
+[
+    {
+        "filename": "android_udemy_complete.pdf",
+        "title": "The Complete Android Developer Course: Beginner To Advanced",
+        "provider": "Udemy",
+        "year": 2022,
+        "category": "Mobile Development"
+    },
+    {
+        "filename": "android_linkedin_arch.pdf",
+        "title": "Building an Android App with Architecture Components",
+        "provider": "LinkedIn",
+        "year": 2019,
+        "category": "Mobile Development"
+    },
+    {
+        "filename": "eth_udemy_bootcamp.pdf",
+        "title": "Ethereum Blockchain Developer Bootcamp With Solidity (2022)",
+        "provider": "Udemy",
+        "year": 2022,
+        "category": "Blockchain"
+    },
+    {
+        "filename": "blockchain_udemy_complete.pdf",
+        "title": "Blockchain Engineer Training: The Complete Course!",
+        "provider": "Udemy",
+        "year": 2021,
+        "category": "Blockchain"
+    },
+    {   "filename": "solidity_udemy_master.pdf",
+        "title": "Master Ethereum & Solidity Programming From Scratch in 2022",
+        "provider": "Udemy",
+        "year": 2021,
+        "category": "Blockchain"
+    }
+]

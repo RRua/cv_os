@@ -4,43 +4,46 @@
     align-items: self-start;
     flex-wrap: wrap;
     justify-content: left;
-    border: 2px solid #252344;
-    background: linear-gradient(45deg, #d14114, #77116f, #512750, #2a001e, #5e2750, #77216f);
-    width: 99vw;
-    height: 99vh;
+    background: none;
+    min-height: 100vh;
+    min-width: 100vw;
+    height: fit-content;
     z-index: 0;
 }
 
-.desktop_folder {
+.desktop_icon {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     margin-left: 5px;
     margin-right: 5px;
     transition: transform 0.3s;
-    border: 2px solid #fff;
-    width: 100px;
-    height: 100px;
-    margin: 100px;
+    width: 8.5vw;
+    margin: 12px;
 }
 
-  .desktop_folder img {
+  .desktop_icon img {
     margin: 0px 0px 0px 0px;
     width: 70%;
     height: 70%;
-    border-radius: 10px;
     transition: transform 0.3s;
-    border: 2px solid #fff;
     cursor: pointer;
   }
   
-  .desktop_folder:hover img {
+  .desktop_icon:hover img {
     transform: scale(1.2);
   }
 
-  .desktop_folder p {
+  .desktop_icon p {
     color: #fff;
-    white-space: nowrap;
-    border: 2px solid #fff;
     cursor: move;
+    font-size: 1.2vw;
+    word-break: break-all;
+    text-overflow: ellipsis; 
   }
+
+  .desktop_icon p:first-letter {
+    text-transform: uppercase;
+}

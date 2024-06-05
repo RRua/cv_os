@@ -1,16 +1,13 @@
 
-import TerminalBar from "./WindowAppBar";
 import '../styles/view/TerminalWindowFrame.css';
-import React, { useState, useRef } from 'react';
-import Draggable from 'react-draggable';
+import React, { useState } from 'react';
 
 
-function TerminalApp({onWindowClose, inputRef}) {
+function TerminalApp({inputRef}) {
     const promptString = 'cv@RuiRua:~$ ';
     const [input, setInput] = useState('');
     const [output, setOutput] = useState([]);
   
-
     const handleInputChange = (e) => {
       setInput(e.target.value);
     };
