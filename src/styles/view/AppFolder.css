@@ -29,9 +29,16 @@
     border: 1px solid #fff;
     box-sizing: border-box;
     padding: 0.5%;
-    width: 100%;
-    
+    width: 100%;   
 }
+
+.folder_entry_linear:hover {
+    background-color: #d1d0e5;
+    border: 1px solid #d1d0e5;
+  
+}
+
+
 
 .folder_entry_linear img { 
     min-width: 20px;
@@ -53,16 +60,20 @@
     text-overflow: ellipsis; 
   }
 
+.tooltip-container {
+  position: relative;
+}
 
 .line_tooltip {
   position: absolute;
   top: 30%;
-  left: 50%;
+  left: 80%;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.7);
   color: #fff;
   padding: 5px 10px;
   border-radius: 5px;
   font-size: 15px;
-  width: fit-content;
+  pointer-events: none;
+  z-index: 1000;
 }

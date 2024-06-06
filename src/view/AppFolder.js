@@ -16,10 +16,12 @@ class ViewType {
 const FolderEntry = ({key, icon, name, onclick}) => {
     const [showTooltip, setShowTooltip] = useState(false);
     return  (
-        <div key={key} className="folder_entry_linear"
+        <div key={key} className="folder_entry_linear tooltip-container"
             onMouseEnter={() => setShowTooltip(true)}
             onMouseLeave={() => setShowTooltip(false)}
-            onClick={onclick}>
+            onClick={onclick}
+            
+            >
             <img src={iconImgFromType(icon)} alt={name} />
             <p>{name}</p>
             {showTooltip && <div className="line_tooltip">{name}</div>}

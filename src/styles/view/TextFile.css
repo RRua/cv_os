@@ -8,7 +8,7 @@
     margin: 2px;
     font-family: 'Courier New', Courier, monospace;
     overflow: scroll;  
-    cursor: move; /* Indicate that the top bar is draggable */
+    cursor: move; 
     z-index: 2;
     display: flex;
     flex-direction: column;
@@ -21,31 +21,21 @@
     max-height: 95vh;
     width: 100%;
     max-width: 100vw;
+    height: 100%;
     cursor: text;
     text-align: left;
     overflow: scroll;
 
 }
+
 .file_line{
     display: flex;
     padding-inline: 1%;
 }
 
-
 .file_output strong:first-letter {
     text-transform: uppercase;
 }
-
-::selection {
-    background-color: #cb11a0; /* Background color of selected text */
-    color: white; /* Text color of selected text */
-  }
-
-.file_line::selection {
-    background-color: #cb11a0; /* Background color for selected text in .buttons elements */
-    color: white; /* Text color for selected text in .buttons elements */
-  }
-
 
 .file_top_buttons {
     display: flex;

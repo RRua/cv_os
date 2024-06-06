@@ -7,7 +7,7 @@ import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 
 
-function AppWindow({title, onWindowClose, children}) {
+function AppWindowTest({title, onWindowClose, children}) {
     const [isMinimized, setIsMinimized] = useState(false);
     const [isMaximized, setIsMaximized] = useState(false);
     const contentRef = useRef(null);
@@ -55,23 +55,18 @@ function AppWindow({title, onWindowClose, children}) {
   
     return(
       
-        <Draggable handle=".term_window" cancel=".bar_button .term_content .file_line folder_content" >
+        <Draggable handle=".term_window" cancel=".bar_button .term_content .file_line" >
             <ResizableBox
               axis="both"
               width={size.width}
               height={size.height}
               minConstraints={[size.width, size.height]}
               maxConstraints={[size.width * 100, size.height * 100]}
-              resizeHandles={["sw" , "se" , "ne"]} 
+              resizeHandles={["sw" , "nw" , "se" , "ne"]} 
+              style={{ padding: '3px', border: '1px solid black', boxSizing: 'border-box' }}
             >
-              <div ref={contentRef} className="term_window" style={{height: isMinimized? 'fit-content' : '100%'}}  onClick={handleContainerClick}>
-                  <WindowAppBar title={title} 
-                      onMinimize={toggleMinimize}
-                      onMaximize={toggleMaximize}
-                      onClose={onWindowClose}
-                      isMaximized={isMaximized}
-                  />
-                  {!isMinimized && ChildrenWithProps}
+              <div className="term_window" ref={contentRef} style={{width: '100%', height: '100%', backgroundColor: 'blue'}}>
+                batata
               </div>
             </ResizableBox>
         </Draggable>
@@ -79,5 +74,5 @@ function AppWindow({title, onWindowClose, children}) {
     )    
 }
 
-export default AppWindow;
+export default AppWindowTest;
 

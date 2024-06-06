@@ -6,6 +6,7 @@ import DesktopArea from './view/DesktopArea';
 import TerminalApp from './view/TerminalApp';
 import OpenWindowsSpace from './view/OpenWindowsSpace';
 import data from './data/data.js';
+import AppWindowTest from './view/TestResize';
 
 function App() {
   const [windowApps, setWindowApps] = useState([]);
@@ -39,7 +40,7 @@ function App() {
     }
   ];
 
-  return (
+  const old = (
     <div className="App">
       <DesktopArea onAppOpen={addApp} data={data} />
       <OpenWindowsSpace>
@@ -48,6 +49,16 @@ function App() {
       <Dock icons={defaultIcons}/>
     </div>
   );
+
+  return (<div className="App">
+  <DesktopArea onAppOpen={addApp} data={data} />
+  <OpenWindowsSpace>
+    {windowApps}
+  </OpenWindowsSpace>
+  <Dock icons={defaultIcons}/>
+</div>
+);
+
 }
 
 export default App;
