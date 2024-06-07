@@ -22,12 +22,16 @@
     width: 100%;
     cursor: default;
     max-height: 99vh;
-    
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 
 .term_bar {
     display: flex;
+    top: 0; /* Adjust the top offset as needed */
     background-color: rgb(209, 211, 219);
     padding-inline: 1%;
     max-height: 55px;
@@ -35,6 +39,8 @@
     align-items: center;
     align-items: space-between;
     justify-content: space-between;
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
 }
 
 .bar_header {
@@ -99,6 +105,18 @@
 .prompt_line{
     display: flex;
     padding-inline: 1%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.output {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  width: 100%;
+  height: fit-content;
 }
 
 .output_line{

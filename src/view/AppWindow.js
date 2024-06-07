@@ -50,7 +50,7 @@ function AppWindow({title, onWindowClose, children}) {
       };
 
     const ChildrenWithProps = React.Children.map(children, child =>
-        cloneElement(child, { ...child.props, inputRef}),
+        cloneElement(child, { ...child.props, inputRef, onWindowClose}),
     )
   
     return(

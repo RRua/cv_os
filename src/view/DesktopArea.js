@@ -1,6 +1,5 @@
 import '../styles/view/Desktop.css';
 import DesktopIcon from './DesktopIcon';
-import TerminalApp from './TerminalApp';
 import AppFolder from './AppFolder';
 import ReadOnlyTextFileApp from './ReadOnlyTextFileApp';
 
@@ -25,8 +24,8 @@ function DesktopArea({onAppOpen, data}) {
     
     return(
         <div className="desktop">
-           {Object.keys(data).map(key => {
-                return <DesktopIcon key={1} icon={data_to_icon(key, data[key])}/>
+           {Object.keys(data).map((key) => {
+                return <DesktopIcon key={key} icon={data_to_icon(key, data[key])}/>
 })}
         </div>
     )    
