@@ -1,0 +1,100 @@
+{   
+    "Research_Projects": [
+        {   
+            "title": "Green Software Lab - Green Computing as an Engineering Discipline",
+            "role": "Member/Researcher"
+        },
+        {   
+            "title": "CERCIRAS - Connecting Education and Research Communities for an Innovative Resource Aware Society",
+            "role": "Member"
+        },
+        {   
+            "title": "SusTrainable - Promoting Sustainability as a Fundamental Driver in Software Development Training and Education",
+            "role": "Member, Lecturer"
+        },
+        {   
+            "title": "Prendinger Laboratory - Cryptocurrency Market Prediction Analysis - MOU Internship at NII, Tokyo, Japan",
+            "role": "Member/Researcher"
+        }
+    ],
+    "Reviewing": [
+        {       
+            "id": "Review_QRS_2024",
+            "type": "Scientific Review",
+            "event": "IEEE Conference on Software Quality, Reliability and Security (QRS)",
+            "year": "2024"
+        },
+        {   
+            "id": "Review_QRS_2023",
+            "type": "Scientific Review",
+            "activity": "Scientific Review and Sub-Review",
+            "event": "IEEE Conference on Software Quality, Reliability and Security (QRS)",
+            "year": "2023"
+        },
+        {
+            "id": "Review_QRS_2022",
+            "type": "Scientific Review",
+            "event": "IEEE Conference on Software Quality, Reliability and Security (QRS)",
+            "year": "2022"
+        },
+        {
+            "id": "Review_ICT4S_2022",
+            "type": "Scientific Review",
+            "event": "International Conference on ICT For Sustainability (ICT4S)",
+            "year": "2022"
+        },
+        {
+            "id": "Review_QRS_2019",
+            "type": "Scientific Review",
+            "event": "IEEE Conference on Software Quality, Reliability and Security (QRS)",
+            "year": "2019"
+        },
+        {
+            "id": "Review_Greens_2018",
+            "type": "Scientific Review",
+            "event": "International Workshop on Green and Sustainable Software (GREENS)",
+            "year": "2018"
+        }
+    ],
+    "Committee": [
+        {
+            "id": "Committee_ICT4S_2023",
+            "type": "PC member",
+            "track": "Demonstrations and Posters",
+            "event": "International Conference on ICT For Sustainability (ICT4S)",
+            "year": "2023"
+            },
+        {
+            "id": "Committee_ICSE_2023",
+            "type": "PC member",
+            "track": "SCORE contest",
+            "year": "2023",
+            "event": "IEEE/ACM International Conference on Software Engineering (ICSE)"
+        },
+        {
+            "id": "Committee_ICT4S_2022",
+            "type": "PC member",
+            "track": "Demonstrations and Posters",
+            "event": "International Conference on ICT For Sustainability (ICT4S)",
+            "year": "2022"
+        }
+    ],
+    "Talks": [
+        {
+            "title": "Empirical Performance Analysis of Android applications",
+            "event": "Sustrainable",
+            "year": "2023"
+        },
+        {
+            "title": "Energy Debt: Managing Consumption on Evolving Software",
+            "event": "Sustrainable",
+            "year": "2022"
+        },
+        {
+            "title": "Analyzing energy consumption on Mobile Devices",
+            "event": "Analyzing energy consumption on Mobile Devices (Coimbra, 2022)",
+            "year": "2022"
+        }
+    ]
+
+}

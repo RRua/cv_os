@@ -31,6 +31,7 @@
 .file_line{
     display: flex;
     padding-inline: 1%;
+    white-space: pre-wrap;
 }
 
 .file_output strong:first-letter {

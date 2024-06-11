@@ -7,7 +7,7 @@ import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 
 
-function AppWindow({title, onWindowClose, children}) {
+function AppWindow({itemKey, title, onWindowClose, children}) {
     const [isMinimized, setIsMinimized] = useState(false);
     const [isMaximized, setIsMaximized] = useState(false);
     const contentRef = useRef(null);
@@ -50,7 +50,7 @@ function AppWindow({title, onWindowClose, children}) {
       };
 
     const ChildrenWithProps = React.Children.map(children, child =>
-        cloneElement(child, { ...child.props, inputRef, onWindowClose}),
+        cloneElement(child, { ...child.props, inputRef, onWindowClose, itemKey}),
     )
   
     return(
@@ -68,7 +68,7 @@ function AppWindow({title, onWindowClose, children}) {
                   <WindowAppBar title={title} 
                       onMinimize={toggleMinimize}
                       onMaximize={toggleMaximize}
-                      onClose={onWindowClose}
+                      onClose={(e) => onWindowClose(e, itemKey)}
                       isMaximized={isMaximized}
                   />
                   {!isMinimized && ChildrenWithProps}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/view/DockIcon.css';
+import '../../styles/view/DockIcon.css';
 
 
 const DockIcon = ({ icon }) => {

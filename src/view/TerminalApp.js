@@ -1,21 +1,42 @@
 import '../styles/view/TerminalWindowFrame.css';
 import React, { useState, useEffect, useRef } from 'react';
-import { ExitCommand, ClearCommand, LsCommand, CatCommand, find_key } from '../terminal_commands/NixCommands';
+import { find_key } from '../terminal_commands/Commands';
+import { nixCommands } from '../terminal_commands/NixCommands';
+import {replaceLastOccurrence} from '../utils/utils';
 
-function TerminalApp({ inputRef, onWindowClose, fs }) {
-  const promptString = 'cv@RuiRua:~$ ';
+function TerminalApp({itemKey, inputRef, onWindowClose, fs }) {
+
+  const [currDir, setcurrDir] = useState('~');
+  const [promptString, setPromptString] = useState('cv@rrua:' + currDir + '$ ' );
   const [input, setInput] = useState('');
+  const [data, setData] = useState(fs);
   const [output, setOutput] = useState([]);
   const outputRef = useRef(null);
   const [command_history, setCommandHistory] = useState([]);
   const [command_history_index, setCommandHistoryIndex] = useState(-1); // Initialize to -1
+  const [cursorPosition, setCursorPosition] = useState(0);
   const commands = {
-    help: null,
-    history: null,
-    clear: new ClearCommand(),
-    exit: new ExitCommand(),
-    ls: new LsCommand(),
-    cat: new CatCommand(),
+    help: 'Display available commands and their descriptions',
+    history: 'Display command history',
+    clear: new nixCommands.ClearCommand(),
+    exit: new nixCommands.ExitCommand(),
+    ls: new nixCommands.LsCommand(),
+    cat: new nixCommands.CatCommand(),
+    cd : new nixCommands.CdCommand(),
+    pwd: new nixCommands.PwdCommand(),
+  };
+
+  const updateData = (newData, currDirName) => {
+    setData(newData);
+    const currDir = currDirName ? currDirName : '~ ';
+    setcurrDir(currDir);
+    setPromptString('cv@rrua:' + currDir + '$ ');
+  };
+
+  const updateCursorPosition = () => {
+    if (inputRef.current) {
+      setCursorPosition(inputRef.current.selectionStart);
+    }
   };
 
   const handleInputChange = (e) => {
@@ -29,13 +50,23 @@ function TerminalApp({ inputRef, onWindowClose, fs }) {
       setInput('');
       setCommandHistory((prevHistory) => [...prevHistory, input]);
       setCommandHistoryIndex(-1); // Reset index
+    
     } else if (e.key === 'Tab') {
       e.preventDefault();
       var matchingCandidate = Object.keys(commands).find((c) =>
         c.startsWith(input.split(' ')[input.split(' ').length - 1])
       );
       if (!matchingCandidate) {
-        matchingCandidate = find_key(input.split(' ')[input.split(' ').length - 1], fs, true);
+        const str_to_complete = input.slice(0, cursorPosition).split(' ')[input.slice(0, cursorPosition).split(' ').length - 1];
+        const candidate = find_key(str_to_complete, data, true);
+        if (!candidate){
+          return;
+        }
+        console.log('candidate', candidate);
+        const completedInput = replaceLastOccurrence(input.slice(0, cursorPosition),str_to_complete, candidate);
+        const remainingInput = input.slice(cursorPosition);
+        const modifiedInput = completedInput + remainingInput;
+        setInput(modifiedInput);
       }
       if (matchingCandidate) {
         setInput(input.replace(input.split(' ')[input.split(' ').length - 1], matchingCandidate));
@@ -68,14 +99,15 @@ function TerminalApp({ inputRef, onWindowClose, fs }) {
   }, [output]);
 
   const processCommand = (command) => {
-    const called_cmd = command.split(' ')[0];
+    const args = command.trim().split(' ')
+    const called_cmd = args[0];
     if (called_cmd === 'help') {
       setOutput((prevOutput) => [
         ...prevOutput,
         '',
         'Available commands:',
         '',
-        ...Object.keys(commands).map((cmd) => `${cmd}: ` + (commands[cmd] ? commands[cmd].describe(): '')),
+        ...Object.keys(commands).map((cmd) => `${cmd}: ` + ((commands[cmd] && typeof commands[cmd] !== 'string') ? commands[cmd].describe(): commands[cmd])),
       ]);
     } else if (called_cmd === 'history') {
       setOutput((prevOutput) => [
@@ -87,7 +119,8 @@ function TerminalApp({ inputRef, onWindowClose, fs }) {
         ''
       ]);
     } else if (commands[called_cmd]) {
-      commands[called_cmd].execute(setOutput, command.split(' '), onWindowClose, fs);
+        commands[called_cmd].execute({output: setOutput, args: args, onWindowClose: onWindowClose, itemKey: itemKey,
+           fs: data, updateFs: updateData, rootFs: fs, currDir: currDir});
     } else {
       setOutput((prevOutput) => [
         ...prevOutput,
@@ -106,10 +139,12 @@ function TerminalApp({ inputRef, onWindowClose, fs }) {
         ))}
       </div>
       <div className="prompt_line">
-        <div>{promptString}</div>
+        <div className="prompt_string">{promptString}</div>
         <input
           type="text"
           value={input}
+          onClick={updateCursorPosition}
+          onKeyUp={updateCursorPosition}
           onChange={handleInputChange}
           onKeyDown={handleInputSubmit}
           className="input"

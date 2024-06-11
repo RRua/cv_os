@@ -3,13 +3,20 @@ import '../styles/view/TextFile.css';
 import React from 'react';
 
 
-function ReadOnlyTextFileApp({content, buttonInfo, onBackInfo}) {
+function ReadOnlyTextFileApp({file, buttonInfo, onBackInfo}) {
     const keysToIgnore = ['filename'];
-    const filteredContent = Object.keys(content).filter(key => !keysToIgnore.includes(key));
+    console.log("file", file);
+    const filteredContent = Object.keys(file.content).reduce((acc, key) => {
+        if (!keysToIgnore.includes(key)){
+            acc[key] = file.content[key];
+        }
+        return acc;
+    }, {});
+    console.log("filteredContent", filteredContent);
     return (
         <div className="file_content" style={{ backgroundColor: 'white' }}>
             <div className="file_top_buttons">
-            {onBackInfo && 
+                {onBackInfo && 
                     <button className="file_buttons" onClick={onBackInfo.onclick}>{onBackInfo.text ? onBackInfo.text : "Back"}</button>
                 }
                 {buttonInfo && 
@@ -17,8 +24,11 @@ function ReadOnlyTextFileApp({content, buttonInfo, onBackInfo}) {
                 }
             </div>
             <div className="file_output">
-                {filteredContent.map((key, index) => (
-                    <p key={index} className="file_line"><strong>{key}:</strong>  {Array.isArray(content[key]) ? content[key].join(", ") : content[key]}</p>
+                {Object.keys(filteredContent).map((key, index) => (
+                    <p key={index} className="file_line">
+                        <strong>{key}: </strong>{Array.isArray(filteredContent[key]) 
+                            ? filteredContent[key].join(", ") : filteredContent[key]}
+                    </p>
                   
                 ))}
             </div>

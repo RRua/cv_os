@@ -1,3 +1,6 @@
+import { Directory, File } from "../data/data";
+import {replaceLastOccurrence} from '../utils/utils';
+
 
 export class Command {
   constructor(description) {
@@ -12,7 +15,7 @@ export class Command {
     return 'help: ' + this.description;
   }
 
-  execute(output, args, onWindowClose, fs) {
+  execute({output, args, onWindowClose, fs}) {
     const help_flags = ['-h', '--help'];
     if (args.length > 1 && args.some(arg => help_flags.includes(arg))) {
       output((prevOutput) => [...prevOutput, this.help()]);
@@ -48,6 +51,7 @@ export function transformToTableWithHeader(objects) {
 
 
 export function retrieveObjectsAsString(objects) {
+  console.log('objects', objects);
   const ret = [];
   for (const obj of objects) {
     ret.push('-----------------------')
@@ -67,5 +71,161 @@ export function retrieveObjectsAsString(objects) {
     }
   } 
   return ret;
+}
+
+export function find_key(target_str, fs, match_prefix=false) {
+  console.log('fs', fs);
+  if (!fs) {
+    return null;
+  }
+  if ((target_str.startsWith('/') || target_str.startsWith('~/')) && fs.parentDirectory) {
+    fs = find_root(fs);
+    return find_key(target_str, find_root(fs), match_prefix);
+  }
+  if (target_str.endsWith('/')) {
+    target_str = target_str.slice(0, -1);
+  }
+  if (target_str.includes('/')) {
+    const path = target_str.split('/')
+    let currentObj = fs;
+    for (const dir of path) {
+      if (dir === '') {
+        continue;
+      }
+      if (currentObj instanceof Directory) {
+        currentObj = currentObj.content.find((obj) => find_id(obj) === dir || (match_prefix && find_id(obj).startsWith(dir)));
+      }
+      else{
+        currentObj = find_obj(dir, currentObj);
+      }
+      if (!currentObj) {
+        break;
+      }
+    }
+    return !find_id(currentObj) ? null : target_str.split("/")[target_str.split("/").length -1 ] !== '' ?
+    replaceLastOccurrence(target_str, target_str.split("/")[target_str.split("/").length-1], find_id(currentObj)) : find_id(currentObj);
+  }
+  else {
+    if (fs instanceof Directory) {
+      console.log('fs', fs);
+      const currentObj = fs.content.find((obj) => find_id(obj) === target_str || (match_prefix && find_id(obj).startsWith(target_str)));
+      return !find_id(currentObj) ? null : target_str !== '' ? find_id(currentObj) : null;
+    }
+    else{
+      for (const key in fs) {
+        if (key === target_str || (match_prefix && key.startsWith(target_str))) {
+          return key;
+        }
+        if (typeof fs[key] === 'object') {
+          const result = find_key(target_str, fs[key], match_prefix);
+          if (result) {
+            return result;
+          }
+        }
+      }
+    }
+  }
+  return null;
+    /*
+    for (const key in fs) {
+      if 
+      console.log('key', key);
+      if (key === target_str || (match_prefix && key.startsWith(target_str))) {
+        return key;
+      }
+      if (typeof fs[key] === 'object') {
+        const result = find_key(target_str, fs[key]);
+        if (result) {
+          return result;
+        }
+      }
+    }
+    return null;
+  }*/
+}
+
+export function find_obj(target_str, fs) {
+  if (target_str.startsWith('/') || target_str.startsWith('~/')) {
+    fs = find_root(fs);
+    target_str.slice(1);
+    console.log('fs', fs);
+  }
+  if (target_str.includes('/')) {
+    const path = target_str.split('/');
+    let currentObj = fs;
+    for (const dir of path) {
+      if (dir === '') {
+        continue;
+      }
+      currentObj = find_obj(dir, currentObj);
+      if (!currentObj) {
+        break;
+      }
+    }
+    return currentObj;
+  }
+  else {
+    if (fs instanceof Directory) {
+      if (target_str === fs.name) {
+        return target_str
+      }
+      const currentObj = fs.content.find((obj) => find_id(obj) === target_str);
+      return currentObj;
+    }
+    for (const key in fs) {
+      if (key === target_str) {
+        return fs[key];
+      }
+      if (typeof fs[key] === 'object') {
+        const result = find_obj(target_str, fs[key]);
+        if (result) {
+          return result;
+        }
+      }
+      if (find_id(fs[key]) === target_str) {
+        return fs;
+      }
+    }
+    return null;
+  }
+}
+
+export function find_id(obj) {
+  if (typeof obj === 'string'){
+    return obj;
+  }
+  if (obj instanceof Directory) {
+    return obj.name;
+  }
+  console.log('obj', obj);
+  for (const key in obj) {
+    if (key === 'parentDirectory') {
+      continue;
+    }
+    if (typeof obj[key] === 'object') {
+      const result = find_id(obj[key]);
+      if (result) {
+        return result;
+      }
+    }
+    if (['filename', 'id', 'uri', 'doi'].includes(key)) {
+      return obj[key];
+    }
+  }
+  if (obj instanceof File) {
+    return obj.name;
+  }
+  return null;
+}
+
+export function find_root(fs) {
+  if (!fs) {
+    return null;
+  }
+  var target_obj = fs;
+  while (target_obj.parentDirectory) {
+    target_obj = target_obj.parentDirectory;
+  }
+  return target_obj;
 }
 

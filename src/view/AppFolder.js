@@ -3,6 +3,7 @@ import DesktopIcon from './DesktopIcon';
 import '../styles/view/AppFolder.css';
 import ReadOnlyTextFileApp from './ReadOnlyTextFileApp';
 import { iconImgFromType, getFilesURL} from '../utils/utils';
+import { Directory } from '../data/data';
 
 
 class ViewType {
@@ -15,6 +16,7 @@ class ViewType {
 
 const Listbox = ({ options, onSelect, default_text="Select attribute"}) => {
     const [selectedOption, setSelectedOption] = useState('');
+    
     const handleChange = (e) => {
         const value = e.target.value;
         setSelectedOption(value);
@@ -33,14 +35,13 @@ const Listbox = ({ options, onSelect, default_text="Select attribute"}) => {
     );
 };
 
-const FolderEntry = ({key, icon, name, onclick}) => {
+const FolderEntry = ({fkey, icon, name, onclick}) => {
     const [showTooltip, setShowTooltip] = useState(false);
     return  (
-        <div key={key} className="folder_entry_linear tooltip-container"
+        <div key={fkey} className="folder_entry_linear tooltip-container"
             onMouseEnter={() => setShowTooltip(true)}
             onMouseLeave={() => setShowTooltip(false)}
-            onClick={onclick}
-            
+            onClick={onclick}  
             >
             <img src={iconImgFromType(icon)} alt={name} />
             <p>{name}</p>
@@ -51,18 +52,37 @@ const FolderEntry = ({key, icon, name, onclick}) => {
 
 
 const AppFolder = ({name, openApp, data, view_type=ViewType.List, searchBar=true}) => {
-    const [dataToShow, setDataToShow] = useState(data);
+    const [dataToShow, setDataToShow] = useState(data.content);
+    const [currData, setCurrData] = useState(data);
+    //const [filteredDataToShow, setFilteredDataToShow] = useState(data);
     const [inputValue, setInputValue] = useState('');
     const [selectedOption, setSelectedOption] = useState('');
     const default_text = "Select attribute";
+    const [options, setOptions] = useState([]); 
 
     const getOptionsOnData = (data) => {
+        console.log("data", data);
+        if (data.content.length === 0) {
+                return options;
+        }
         let keys = new Set();
-        data.forEach((file) => {
-            Object.keys(file).forEach((key) => keys.add(key));
+        data.content.forEach((file) => {
+            if (file instanceof Directory){
+                keys.add('name');
+            }
+            else {
+                Object.keys(file.content).forEach((key) => {
+                    keys.add(key);
+                });
+            }
         });
-        return Array.from(keys);
+        const opt = Array.from(keys);
+        if (options.length !== opt.length){
+            setOptions(opt);
+        }
+        return options;
     };
+
 
     const handleSelect = (value) => {
         setSelectedOption(value);
@@ -71,62 +91,88 @@ const AppFolder = ({name, openApp, data, view_type=ViewType.List, searchBar=true
 
     const handleInputChange = (value) => {
         setInputValue(value.target.value);
-        if (value.target.value === '') {
-            setDataToShow(data);
-            return;
-        }
-        const filteredData = data.filter((file) => {
-            return Object.keys(file).some((key) => {
-                const search_val = (selectedOption === ''|| selectedOption === default_text || !file[selectedOption]) ? key : selectedOption;
-                return typeof file === 'object' ? 
-                        file[search_val].toString().toLowerCase().includes(value.target.value.toLowerCase()) 
-                            : (Array.isArray(file) ? file[search_val].join(", ").toLowerCase().includes(value.target.value.toLowerCase()) 
-                                : false);
-            });
+        const filteredData = currData.content.filter((file) => {
+            if (file.name.toString().toLowerCase().includes(value.target.value.toString().toLowerCase())){    
+                return true;
+            }
+            return Object.keys(file.content).some((key) => {
+                return key === selectedOption && file.content[key].toString().toLowerCase().includes(value.target.value.toLowerCase());
+                });
         });
         setDataToShow(filteredData);
     }
 
+    console.log("toshow",dataToShow);
+
     return (
-        <div className="folder_content">
+        <div>
            {searchBar && 
                 <div className="folder_top_bar">
-                    <Listbox options={getOptionsOnData(data)} onSelect={handleSelect} default_text={default_text} />
+                    <button className="file_buttons" 
+                        onClick={() => {
+                            setDataToShow(currData.parentDirectory ? currData.parentDirectory.content : dataToShow);
+                            setCurrData(currData.parentDirectory? currData.parentDirectory : data);
+                            }
+                        }>
+                    Back
+                    </button>
+                    <Listbox options={getOptionsOnData(currData)} onSelect={handleSelect} default_text={default_text} />
                     <input value={inputValue} type="text" placeholder="Search..." onChange={handleInputChange} />
                     {/*<button><img className='top_bar_img' src={require("../assets/search-icon.png")}></img></button>*/}
                 </div>  
             }
-            {dataToShow.map((file, index) => (
-                view_type === ViewType.Grid ?
-                    <DesktopIcon  key={index} 
-                    icon={{
-                            icon_type: 'file',
-                            name: file.title,
-                            onclick: () => {
-                                openApp(file.filename, file.filename,
-                                    <ReadOnlyTextFileApp content={file} buttonInfo={{
-                                            text: "Open File",
-                                            onclick: () => {window.open(file.url? file.url : `${getFilesURL()}/${file.filename}`, "_blank")}
+            <div className="folder_content">
+                {   dataToShow &&
+                    dataToShow.map((file, index) => (
+                        <FolderEntry key={index} fkey={index} icon={file instanceof Directory ? 'folder': 'file'} name={file.name} 
+                            onclick={() => {
+                                if (file instanceof Directory){
+                                    setDataToShow(file.content);
+                                    setCurrData(file);
+                                    openApp(file.name, file.name,
+                                        <AppFolder name={file.name} openApp={openApp} 
+                                        data={file}/>)
+                                }
+                                else {
+                                    openApp(file.name, file.name,
+                                        <ReadOnlyTextFileApp file={file} 
+                                        buttonInfo={ file.content.url? {
+                                            text: "Open",
+                                            onclick: () => {window.open(`${getFilesURL()}/${file.filename}`, "_blank")}
+                                        }: null}
+                                        onBackInfo={{
+                                            text: "Back",
+                                            onclick: () => {openApp(name, name, <AppFolder name={name} openApp={openApp} data={currData} view_type={ViewType.List}/>)}
+                                        }}/>)
                                     }
-                                    }/>)
-                            }
-                    }}/>
-                : <FolderEntry key={index} icon={file.icon} name={file.title} 
+                                }}>
+                        </FolderEntry>))
+                }
+                {/*Array.isArray(dataToShow) ? (dataToShow.map((file, index) => (
+                    <FolderEntry key={index} fkey={index} icon={file.icon} name={file.title} 
                         onclick={() => {
-                                openApp(file.filename, file.filename,
-                                    <ReadOnlyTextFileApp content={file} 
-                                    buttonInfo={{
-                                        text: "Open File",
-                                        onclick: () => {window.open(file.url? file.url : `${getFilesURL()}/${file.filename}`, "_blank")}
-                                    }}
-                                    onBackInfo={{
-                                        text: "Back",
-                                        onclick: () => {openApp(name, name, <AppFolder name={name} openApp={openApp} data={data} view_type={ViewType.List}/>)}
-                                    }}/>)
+                            openApp(file.filename, file.filename,
+                                <ReadOnlyTextFileApp content={file} 
+                                buttonInfo={ file.url? {
+                                    text: "Open",
+                                    onclick: () => {window.open(`${getFilesURL()}/${file.filename}`, "_blank")}
+                                }: null}
+                                onBackInfo={{
+                                    text: "Back",
+                                    onclick: () => {openApp(name, name, <AppFolder name={name} openApp={openApp} data={data} view_type={ViewType.List}/>)}
+                                }}/>)
                             }}>
-                            </FolderEntry>
-
-            ))}
+                    </FolderEntry>)))
+                    : (Object.keys(dataToShow).map((k) => { return <FolderEntry key={k} fkey={k} icon="folder" name={k}
+                        onclick={() => {
+                            setDataToShow(dataToShow[k]);
+                            console.log(dataToShow[k]);
+                            openApp(k, k,
+                                <AppFolder name={k} openApp={openApp} 
+                                data={dataToShow[k]}/>)
+                        }}/>}))
+                    */}
+            </div>
         </div>
     );
 };

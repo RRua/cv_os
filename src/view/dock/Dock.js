@@ -1,8 +1,8 @@
 import React from 'react';
-import '../styles/view/Dock.css';
+import '../../styles/view/Dock.css';
 import DockIcon from './DockIcon';
 
-const Dock = ({ icons}) => {
+const Dock = ({icons}) => {
  
   return (
     <div className="dock">

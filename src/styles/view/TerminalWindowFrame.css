@@ -40,7 +40,6 @@
     align-items: space-between;
     justify-content: space-between;
     position: -webkit-sticky; /* For Safari */
-    position: sticky;
 }
 
 .bar_header {
@@ -49,6 +48,7 @@
     width: 80%;
     margin-left: 2px;
     margin-right: 2px;
+    text-overflow: ellipsis; 
 }
 
 .bar_header:first-letter {
@@ -93,18 +93,19 @@
   }
 
   .input {
-    width: 95%;
     background: #282c34;
     color: green;
     border: none;
     outline: none;
     font-family: 'Courier New', Courier, monospace;
+    flex: 1; /* Take up the remaining space */
    
   }
 
 .prompt_line{
     display: flex;
     padding-inline: 1%;
+    flex-direction: row;
     width: 100%;
     box-sizing: border-box;
 }
@@ -117,6 +118,10 @@
   scroll-behavior: smooth;
   width: 100%;
   height: fit-content;
+}
+
+.prompt_string {
+  width: fit-content;
 }
 
 .output_line{
