@@ -54,7 +54,6 @@ const FolderEntry = ({fkey, icon, name, onclick}) => {
 const AppFolder = ({name, openApp, data, view_type=ViewType.List, searchBar=true}) => {
     const [dataToShow, setDataToShow] = useState(data.content);
     const [currData, setCurrData] = useState(data);
-    //const [filteredDataToShow, setFilteredDataToShow] = useState(data);
     const [inputValue, setInputValue] = useState('');
     const [selectedOption, setSelectedOption] = useState('');
     const default_text = "Select attribute";
@@ -105,13 +104,13 @@ const AppFolder = ({name, openApp, data, view_type=ViewType.List, searchBar=true
     console.log("toshow",dataToShow);
 
     return (
-        <div>
+        <div className='folder_content'>
            {searchBar && 
                 <div className="folder_top_bar">
                     <button className="file_buttons" 
                         onClick={() => {
                             setDataToShow(currData.parentDirectory ? currData.parentDirectory.content : dataToShow);
-                            setCurrData(currData.parentDirectory? currData.parentDirectory : data);
+                            setCurrData(currData.parentDirectory? currData.parentDirectory : currData);
                             }
                         }>
                     Back

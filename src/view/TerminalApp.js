@@ -96,7 +96,7 @@ function TerminalApp({itemKey, inputRef, onWindowClose, fs }) {
     if (outputRef.current) {
       outputRef.current.scrollTop = outputRef.current.scrollHeight;
     }
-  }, [output]);
+  }, [input]);
 
   const processCommand = (command) => {
     const args = command.trim().split(' ')
@@ -130,10 +130,10 @@ function TerminalApp({itemKey, inputRef, onWindowClose, fs }) {
   };
 
   return (
-    <div className="term_content">
-      <div className="output" ref={outputRef}>
+    <div className="term_content" ref={outputRef}>
+      <div className="output" >
         {output.map((line, index) => (
-          <div className="output_line" key={index}>
+          <div className="output_line selectable" key={index}>
             {line || <>&nbsp;</>}
           </div>
         ))}

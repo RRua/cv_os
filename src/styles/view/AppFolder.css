@@ -1,36 +1,27 @@
 
-
 .folder_content {
-    min-height: 35vh;
-    cursor: default;
-    display: flex;
-    flex-direction: column;
-    align-content: flex-start;
-    justify-content: left;
-    border: 2px solid #d1d0e5;
-    max-height: 100vh;
-    padding: 1%;
-    overflow: scroll;
-    scrollbar-color: #ffff #fff;
-    background-color: #f1e9e9;
-    box-sizing: border-box;
-    height: 100%;
+  cursor: default;
+  overflow-y: auto; /* Enable vertical scrolling */
+  flex-grow: 1; /* Allow the folder_content to grow within the container */
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  justify-content: left;
+  scrollbar-color: #ffff #fff;
+  background-color: #f1e9e9;
+  box-sizing: border-box;
     
 }
 
 .folder_top_bar {
   display: flex;
   background-color: rgb(209, 211, 219);
-  padding-inline: 1%;
-  border-top: 1px solid #fff;
   max-height: 60px;
   min-height: 40px;
-  padding: 2px;
-  box-sizing: border-box;
   align-items: center;
   justify-content: start;
-  position: -webkit-sticky; /* For Safari */
-  position: sticky;
+  box-sizing: border-box;
+  
 }
 
 .top_bar_select {
@@ -59,6 +50,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 1%;
 }
 
 .folder_top_bar button img{
@@ -76,9 +68,9 @@
     border-radius: 5px;
     cursor: pointer;
     border: 1px solid #fff;
-    box-sizing: border-box;
     padding: 0.5%;
-    width: 100%;   
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .folder_entry_linear:hover {
@@ -95,6 +87,8 @@
     height: 3vh;
     width: 3vh;
     cursor: pointer;
+    margin-left: 2%;
+    margin-right: 1%;
   }
   
   .folder_entry_linear p { 

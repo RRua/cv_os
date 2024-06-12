@@ -11,8 +11,8 @@ function AppWindow({itemKey, title, onWindowClose, children}) {
     const [isMinimized, setIsMinimized] = useState(false);
     const [isMaximized, setIsMaximized] = useState(false);
     const contentRef = useRef(null);
-    const [size, setSize] = useState({ width: 400, height: 400 });
-    const [prev_size, prev_setSize] = useState({ width: 400, height: 400 });
+    const [size, setSize] = useState({ width: 400, height: 300 });
+    const [prev_size, prev_setSize] = useState({ width: 400, height: 300 });
     const inputRef = useRef(null);
 
     useEffect(() => {
@@ -55,16 +55,17 @@ function AppWindow({itemKey, title, onWindowClose, children}) {
   
     return(
       
-        <Draggable handle=".term_window" cancel=".bar_button .term_content .file_line folder_content" >
+        <Draggable handle=".app_window" cancel=".bar_button .term_content .file_line folder_content" >
             <ResizableBox
               axis="both"
-              width={size.width}
+              width={isMinimized ? 'fit-content' : size.width}
               height={size.height}
               minConstraints={[size.width, size.height]}
               maxConstraints={[size.width * 100, size.height * 100]}
-              resizeHandles={["sw" , "se" , "ne"]} 
+              resizeHandles={isMinimized ? [] : ["sw" , "se" , "ne"]} 
+              style={{border: '2px solid #0000'}}
             >
-              <div ref={contentRef} className="term_window" style={{height: isMinimized? 'fit-content' : '100%'}}  onClick={handleContainerClick}>
+              <div ref={contentRef} className="app_window" style={{height: isMinimized? 'fit-content' : '100%'}}  onClick={handleContainerClick}>
                   <WindowAppBar title={title} 
                       onMinimize={toggleMinimize}
                       onMaximize={toggleMaximize}

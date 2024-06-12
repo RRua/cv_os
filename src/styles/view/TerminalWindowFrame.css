@@ -1,39 +1,39 @@
 
 
-.term_window {
-    border-radius: 2%;
-    background-color: #282c34;
-    border: 3px solid #fff;
-    color: green;
-    font-family: 'Courier New', Courier, monospace;
-    overflow: scroll;  
-    cursor: move; /* Indicate that the top bar is draggable */
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    overflow-wrap: normal;
-    box-sizing:border-box;
-    width: 100%;
-    height: 100%;
+.app_window {
+  border-radius: 3px;
+  border: 3px solid #fff;
+  color: green;
+  font-family: 'Courier New', Courier, monospace;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%; 
+  box-sizing: border-box;
 }
 
 .term_content {
+    background-color: #282c34;
     min-height: 30vh;
     width: 100%;
-    cursor: default;
     max-height: 99vh;
     text-align: left;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    height: 100%;
+    overflow: scroll;
 }
 
 
 .term_bar {
     display: flex;
-    top: 0; /* Adjust the top offset as needed */
     background-color: rgb(209, 211, 219);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     padding-inline: 1%;
+    cursor: move;
     max-height: 55px;
     min-height: 20px;
     align-items: center;
@@ -98,8 +98,7 @@
     border: none;
     outline: none;
     font-family: 'Courier New', Courier, monospace;
-    flex: 1; /* Take up the remaining space */
-   
+    width: 100%;
   }
 
 .prompt_line{
@@ -114,10 +113,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  overflow-y: auto;
-  scroll-behavior: smooth;
   width: 100%;
-  height: fit-content;
 }
 
 .prompt_string {
@@ -129,3 +125,9 @@
     padding-inline: 1%;
 }
 
+.selectable {
+  -webkit-user-select: text; /* Safari */
+  -moz-user-select: text;    /* Firefox */
+  -ms-user-select: text;     /* IE/Edge */
+  user-select: text;         /* Non-prefixed version */
+}
