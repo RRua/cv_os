@@ -78,9 +78,16 @@ export function find_key(target_str, fs, match_prefix=false) {
   if (!fs) {
     return null;
   }
+  
   if ((target_str.startsWith('/') || target_str.startsWith('~/')) && fs.parentDirectory) {
-    fs = find_root(fs);
     return find_key(target_str, find_root(fs), match_prefix);
+  }
+  if (target_str.startsWith('../') && fs.parentDirectory) {
+    console.log("panasca", target_str);
+    fs = fs.parentDirectory ? fs.parentDirectory : fs;
+    target_str = target_str.slice(3);
+    const res = find_key(target_str, fs, match_prefix);
+    return !res? res : '../' + res;
   }
   if (target_str.endsWith('/')) {
     target_str = target_str.slice(0, -1);
@@ -93,7 +100,8 @@ export function find_key(target_str, fs, match_prefix=false) {
         continue;
       }
       if (currentObj instanceof Directory) {
-        currentObj = currentObj.content.find((obj) => find_id(obj) === dir || (match_prefix && find_id(obj).startsWith(dir)));
+        currentObj = currentObj.content.find((obj) => find_id(obj).toUpperCase() === dir.toUpperCase() 
+          || (match_prefix && find_id(obj).toUpperCase().startsWith(dir.toUpperCase())));
       }
       else{
         currentObj = find_obj(dir, currentObj);
@@ -108,12 +116,13 @@ export function find_key(target_str, fs, match_prefix=false) {
   else {
     if (fs instanceof Directory) {
       console.log('fs', fs);
-      const currentObj = fs.content.find((obj) => find_id(obj) === target_str || (match_prefix && find_id(obj).startsWith(target_str)));
+      const currentObj = fs.content.find((obj) => find_id(obj).toUpperCase() === target_str.toUpperCase()
+       || (match_prefix && find_id(obj).toUpperCase().startsWith(target_str.toUpperCase())));
       return !find_id(currentObj) ? null : target_str !== '' ? find_id(currentObj) : null;
     }
     else{
       for (const key in fs) {
-        if (key === target_str || (match_prefix && key.startsWith(target_str))) {
+        if (key.toUpperCase() === target_str.toUpperCase() || (match_prefix && key.toUpperCase().startsWith(target_str.toUpperCase()))) {
           return key;
         }
         if (typeof fs[key] === 'object') {
@@ -126,28 +135,17 @@ export function find_key(target_str, fs, match_prefix=false) {
     }
   }
   return null;
-    /*
-    for (const key in fs) {
-      if 
-      console.log('key', key);
-      if (key === target_str || (match_prefix && key.startsWith(target_str))) {
-        return key;
-      }
-      if (typeof fs[key] === 'object') {
-        const result = find_key(target_str, fs[key]);
-        if (result) {
-          return result;
-        }
-      }
-    }
-    return null;
-  }*/
 }
 
 export function find_obj(target_str, fs) {
   if (target_str.startsWith('/') || target_str.startsWith('~/')) {
     fs = find_root(fs);
-    target_str.slice(1);
+    target_str = target_str.startsWith('/') ? target_str.slice(1) : target_str.slice(2);
+    console.log('fs', fs);
+  }
+  if (target_str.startsWith('../')) {
+    fs = fs.parentDirectory ? fs.parentDirectory : fs;
+    target_str = target_str.slice(2);
     console.log('fs', fs);
   }
   if (target_str.includes('/')) {
@@ -208,7 +206,7 @@ export function find_id(obj) {
         return result;
       }
     }
-    if (['filename', 'id', 'uri', 'doi'].includes(key)) {
+    if (['filename', 'id', 'uri', 'doi'].includes(key.toLowerCase())) {
       return obj[key];
     }
   }

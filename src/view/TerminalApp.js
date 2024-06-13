@@ -3,14 +3,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { find_key } from '../terminal_commands/Commands';
 import { nixCommands } from '../terminal_commands/NixCommands';
 import {replaceLastOccurrence} from '../utils/utils';
+import { SocialsCommand } from '../terminal_commands/CustomCommands';
 
 function TerminalApp({itemKey, inputRef, onWindowClose, fs }) {
-
+  const promptStringPrefix = 'cv@rrua:';
+  const welcomeMessage = "Welcome to the Terminal interface of the CV OS, built by Rui Rua. To know which commands are available, use the help command.";
   const [currDir, setcurrDir] = useState('~');
-  const [promptString, setPromptString] = useState('cv@rrua:' + currDir + '$ ' );
+  const [promptString, setPromptString] = useState( promptStringPrefix + currDir + '$ ' );
   const [input, setInput] = useState('');
   const [data, setData] = useState(fs);
-  const [output, setOutput] = useState([]);
+  const [output, setOutput] = useState([welcomeMessage]);
   const outputRef = useRef(null);
   const [command_history, setCommandHistory] = useState([]);
   const [command_history_index, setCommandHistoryIndex] = useState(-1); // Initialize to -1
@@ -24,13 +26,14 @@ function TerminalApp({itemKey, inputRef, onWindowClose, fs }) {
     cat: new nixCommands.CatCommand(),
     cd : new nixCommands.CdCommand(),
     pwd: new nixCommands.PwdCommand(),
+    socials : new SocialsCommand(),
   };
 
   const updateData = (newData, currDirName) => {
     setData(newData);
     const currDir = currDirName ? currDirName : '~ ';
     setcurrDir(currDir);
-    setPromptString('cv@rrua:' + currDir + '$ ');
+    setPromptString(promptStringPrefix + currDir + '$ ');
   };
 
   const updateCursorPosition = () => {
@@ -56,6 +59,7 @@ function TerminalApp({itemKey, inputRef, onWindowClose, fs }) {
       var matchingCandidate = Object.keys(commands).find((c) =>
         c.startsWith(input.split(' ')[input.split(' ').length - 1])
       );
+      console.log('match candidate', matchingCandidate);
       if (!matchingCandidate) {
         const str_to_complete = input.slice(0, cursorPosition).split(' ')[input.slice(0, cursorPosition).split(' ').length - 1];
         const candidate = find_key(str_to_complete, data, true);
@@ -64,7 +68,7 @@ function TerminalApp({itemKey, inputRef, onWindowClose, fs }) {
         }
         console.log('candidate', candidate);
         const completedInput = replaceLastOccurrence(input.slice(0, cursorPosition),str_to_complete, candidate);
-        const remainingInput = input.slice(cursorPosition);
+        const remainingInput = input.slice(cursorPosition+1);
         const modifiedInput = completedInput + remainingInput;
         setInput(modifiedInput);
       }
@@ -129,11 +133,15 @@ function TerminalApp({itemKey, inputRef, onWindowClose, fs }) {
     }
   };
 
+  const handleMouseDown = (event) => {
+    event.stopPropagation(); // Prevent the drag event from being triggered
+  };
+
   return (
     <div className="term_content" ref={outputRef}>
-      <div className="output" >
+      <div className="output" onMouseDown={handleMouseDown} >
         {output.map((line, index) => (
-          <div className="output_line selectable" key={index}>
+          <div className="output_line selectable" key={index} onMouseDown={handleMouseDown}>
             {line || <>&nbsp;</>}
           </div>
         ))}

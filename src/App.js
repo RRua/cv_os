@@ -6,9 +6,23 @@ import DesktopArea from './view/DesktopArea';
 import TerminalApp from './view/TerminalApp';
 import OpenWindowsSpace from './view/OpenWindowsSpace';
 import {data} from './data/data.js';
+import SettingsApp from './view/SettingsApp';
+
+
+const SuspendedScreen = ({onLogin}) => {
+  return (
+    <div className="suspended_screen">
+      <img src={require('./assets/user-icon.png')} alt="user profile"></img>
+      <h1>Welcome CvTerminal OS User</h1>
+      <button onClick={onLogin}>LogIn</button>
+    </div>
+  )
+}
+
 
 function App() {
   const [windowApps, setWindowApps] = useState([]);
+  const [suspended, setSuspended] = useState(false);
  
   const addApp = (id, title, app) => {
     const newApp = (
@@ -25,7 +39,16 @@ function App() {
     });
   };
 
-  const defaultIcons = [
+  const onShutdown = (e) => {
+    setSuspended(true);
+    setWindowApps([]);
+  };
+
+  const onSuspend  = (e) => {
+      setSuspended(true);
+  };
+
+  var defaultIcons = [
     {   src: require('./assets/terminal-icon.png'),
         alt: 'Terminal',
         onclick: () => {addApp(windowApps.length, 'Terminal', <TerminalApp fs={data}/>)}
@@ -41,17 +64,29 @@ function App() {
     {   src: require('./assets/linktree-icon.png'),
         alt: 'linktree (Links)',
         onclick: () => window.open('https://linktr.ee/ruirua')
-    }
+    },
+    {   src: require('./assets/settings-icon.png'),
+      alt: 'Settings',
+      onclick: () => addApp(windowApps.length, 'Settings', <SettingsApp onShutdown={onShutdown} onSuspend={onSuspend}/>)
+  }
   ];
-  return (
-  <div className="App">
-    <DesktopArea onAppOpen={addApp} data={data} />
-    <OpenWindowsSpace>
-      {windowApps}
-    </OpenWindowsSpace>
-    <Dock icons={defaultIcons}/>
-  </div>
-);
+
+  return ( 
+    suspended ? 
+      ( <div className="App">
+          <SuspendedScreen onLogin={() => setSuspended(false)}>
+          </SuspendedScreen>
+        </div>)
+      : ( <div className="App">
+            <DesktopArea onAppOpen={addApp} data={data} />
+            <OpenWindowsSpace>
+              {windowApps}
+            </OpenWindowsSpace>
+            <Dock icons={defaultIcons}/>
+          </div>
+  
+        )
+    );
 
 }
 

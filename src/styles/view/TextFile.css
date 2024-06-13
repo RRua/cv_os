@@ -34,9 +34,16 @@
     white-space: pre-wrap;
 }
 
+
+.file_output {
+    user-select: text;
+}
+
 .file_output strong:first-letter {
     text-transform: uppercase;
 }
+
+
 
 .file_top_buttons {
     display: flex;

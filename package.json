@@ -1,6 +1,7 @@
 {
   "name": "terminal_cv",
   "version": "0.1.0",
+  "homepage": "https://rrua.github.io/terminal_cv",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -9,6 +10,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-draggable": "^4.4.6",
+    "react-resizable": "^3.0.5",
     "react-rnd": "^10.4.11",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4",
@@ -26,6 +28,8 @@
     "workbox-streams": "^6.6.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -48,5 +52,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
   }
 }

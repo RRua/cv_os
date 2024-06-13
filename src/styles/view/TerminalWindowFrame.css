@@ -1,9 +1,8 @@
-
+@import url('../index.css');
 
 .app_window {
   border-radius: 3px;
   border: 3px solid #fff;
-  color: green;
   font-family: 'Courier New', Courier, monospace;
   z-index: 2;
   display: flex;
@@ -11,12 +10,12 @@
   width: 100%;
   height: 100%; 
   box-sizing: border-box;
-  pointer-events: all; /* Allows clicks to pass through this div */
+  pointer-events: auto; /* Allows clicks to pass through this div */
 }
 
 .term_content {
-    background-color: #282c34;
-    min-height: 30vh;
+    background-color: var(--background-color);
+    min-height: 20vh;
     width: 100%;
     max-height: 99vh;
     text-align: left;
@@ -25,12 +24,13 @@
     align-items: flex-start;
     height: 100%;
     overflow: scroll;
+    pointer-events: auto;
 }
 
 
 .term_bar {
     display: flex;
-    background-color: rgb(209, 211, 219);
+    background-color: var(--window-color);
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     padding-inline: 1%;
@@ -41,7 +41,7 @@
     align-items: space-between;
     justify-content: space-between;
     position: -webkit-sticky; /* For Safari */
-    pointer-events: all;
+    pointer-events: auto;
 }
 
 .bar_header {
@@ -95,8 +95,8 @@
   }
 
   .input {
-    background: #282c34;
-    color: green;
+    background-color: var(--background-color);
+    color: var(--text-color);;
     border: none;
     outline: none;
     font-family: 'Courier New', Courier, monospace;
@@ -116,6 +116,7 @@
   flex-direction: column;
   justify-content: flex-end;
   width: 100%;
+  user-select: text;
 }
 
 .prompt_string {
@@ -125,6 +126,7 @@
 .output_line{
     display: flex;
     padding-inline: 1%;
+    user-select: text;
 }
 
 .selectable {

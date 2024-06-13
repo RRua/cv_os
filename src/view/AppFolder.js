@@ -1,5 +1,5 @@
 import {React, useState} from 'react';
-import DesktopIcon from './DesktopIcon';
+//import DesktopIcon from './DesktopIcon';
 import '../styles/view/AppFolder.css';
 import ReadOnlyTextFileApp from './ReadOnlyTextFileApp';
 import { iconImgFromType, getFilesURL} from '../utils/utils';
@@ -147,30 +147,6 @@ const AppFolder = ({name, openApp, data, view_type=ViewType.List, searchBar=true
                                 }}>
                         </FolderEntry>))
                 }
-                {/*Array.isArray(dataToShow) ? (dataToShow.map((file, index) => (
-                    <FolderEntry key={index} fkey={index} icon={file.icon} name={file.title} 
-                        onclick={() => {
-                            openApp(file.filename, file.filename,
-                                <ReadOnlyTextFileApp content={file} 
-                                buttonInfo={ file.url? {
-                                    text: "Open",
-                                    onclick: () => {window.open(`${getFilesURL()}/${file.filename}`, "_blank")}
-                                }: null}
-                                onBackInfo={{
-                                    text: "Back",
-                                    onclick: () => {openApp(name, name, <AppFolder name={name} openApp={openApp} data={data} view_type={ViewType.List}/>)}
-                                }}/>)
-                            }}>
-                    </FolderEntry>)))
-                    : (Object.keys(dataToShow).map((k) => { return <FolderEntry key={k} fkey={k} icon="folder" name={k}
-                        onclick={() => {
-                            setDataToShow(dataToShow[k]);
-                            console.log(dataToShow[k]);
-                            openApp(k, k,
-                                <AppFolder name={k} openApp={openApp} 
-                                data={dataToShow[k]}/>)
-                        }}/>}))
-                    */}
             </div>
         </div>
     );

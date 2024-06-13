@@ -4,14 +4,18 @@ import React from 'react';
 
 
 function ReadOnlyTextFileApp({file, buttonInfo, onBackInfo}) {
-    const keysToIgnore = ['filename'];
-    console.log("file", file);
+    const keysToIgnore = []; //['filename'];
     const filteredContent = Object.keys(file.content).reduce((acc, key) => {
         if (!keysToIgnore.includes(key)){
             acc[key] = file.content[key];
         }
         return acc;
     }, {});
+    
+    const handleMouseDown = (event) => {
+        event.stopPropagation(); // Prevent the drag event from being triggered
+      };
+
     console.log("filteredContent", filteredContent);
     return (
         <div className="file_content" style={{ backgroundColor: 'white' }}>
@@ -23,7 +27,7 @@ function ReadOnlyTextFileApp({file, buttonInfo, onBackInfo}) {
                     <button className="file_buttons" onClick={buttonInfo.onclick}>{buttonInfo.text ? buttonInfo.text : "Open"}</button>
                 }
             </div>
-            <div className="file_output">
+            <div className="file_output" onMouseDown={handleMouseDown} >
                 {Object.keys(filteredContent).map((key, index) => (
                     <p key={index} className="file_line">
                         <strong>{key}: </strong>{Array.isArray(filteredContent[key]) 

@@ -6,7 +6,7 @@ import { iconImgFromType } from '../utils/utils';
 const DesktopIcon = ({ icon}) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const handleClick = (e, f) => {
-    e.stopPropagation();
+    
     if (f){
       f();
     } 
@@ -19,7 +19,7 @@ const DesktopIcon = ({ icon}) => {
              onMouseLeave={() => setShowTooltip(false)}
             onClick={(e) => handleClick(e, icon.onclick)}>
             <img src={iconImgFromType(icon.icon_type)} alt={icon.name} />
-            <p>{icon.name}</p>
+            <p>{icon.name.replace("_", " ")}</p>
             {showTooltip && <div className="tooltip">{icon.name}</div>}
         </div>
     </Draggable>

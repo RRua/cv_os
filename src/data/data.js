@@ -6,6 +6,8 @@ import skills from './skills.json';
 import teaching from './teaching.json';
 import scientific_activities from './scientific_activities.json';
 import hobbies  from './hobbies.json';
+import socials from './socials.json';
+import contributing from './contributing.json';
 
 class Directory {
     constructor(name, parentDirectory, content=[]) {
@@ -44,7 +46,7 @@ function loadData(dirname, data, parentDirectory=null){
         
     }
     else if (typeof data === 'object'){
-        return new File(inferName(data), data, parentDirectory)
+        return new File(inferName(data) ? inferName(data) : dirname, data, parentDirectory);
     }
     return null;
 }
@@ -67,6 +69,8 @@ const scientificDir = new Directory('scientific_activities', data);
 scientificDir.content = Object.keys(scientific_activities).map((item) => loadData(item, scientific_activities[item], scientificDir));
 data.addContent(scientificDir);
 data.addContent(loadData('hobbies', hobbies, data));
+data.addContent(loadData('socials', socials, data));
+data.addContent(loadData('contributing.md', contributing, data));
 
 
 export {data, Directory, File};
