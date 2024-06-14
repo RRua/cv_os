@@ -12,7 +12,7 @@ export class SocialsCommand extends Command {
         if (res) {
             return res;
         }
-        new CatCommand().execute({output, args: ['~/socials'], onWindowClose, fs});
+        new CatCommand().execute({output, args: ['cat', '~/socials'], onWindowClose, fs});
     }
     
 }
