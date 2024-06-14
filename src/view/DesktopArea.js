@@ -1,13 +1,12 @@
 import '../styles/view/Desktop.css';
 import DesktopIcon from './DesktopIcon';
-import AppFolder from './AppFolder';
-import ReadOnlyTextFileApp from './ReadOnlyTextFileApp';
+import AppFolder from './apps/AppFolder';
+import ReadOnlyTextFileApp from './TextFileApp';
 import { Directory } from '../data/data';
 import { getFilesURL } from '../utils/utils';
 
 function DesktopArea({onAppOpen, data}) {
     const data_to_icon = (key, value) => { 
-        console.log("value", value);
         return {   
                 icon_type: value instanceof Directory ? 'folder' : 'file',
                 name: value.name,

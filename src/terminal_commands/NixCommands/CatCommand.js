@@ -14,9 +14,7 @@ export class CatCommand extends Command {
         }
         var new_output = [];
         for(const arg of args.slice(1)) {
-            console.log('arg', arg);
             const target_obj = find_obj(arg, fs);
-            console.log('ttarget_obj', target_obj);
             if (!target_obj) {
                 new_output.push(`File not found: ${arg}`);
             }

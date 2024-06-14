@@ -1,7 +1,7 @@
 import React from 'react';
-import { useTheme } from '../hooks/ThemeContext.js';
-import '../styles/view/Settings.css';
-
+import { useTheme } from '../../hooks/ThemeContext.js';
+import '../../styles/view/Settings.css';
+import { STRINGS } from '../../constants/strings.js';
 
 function SettingsApp({onSuspend, onShutdown}) {
     const { theme, toggleTheme } = useTheme();
@@ -17,22 +17,22 @@ function SettingsApp({onSuspend, onShutdown}) {
     return (
         <div className="settings">
             <div className='settings_line'>
-                <span>Dark Mode</span>
+                <span>{STRINGS.SETTINGS.DARK_MODE}</span>
                 <label className="toggle-switch">
                     <input type="checkbox" checked={theme === 'dark'} onChange={toggleTheme} />
                     <span className="slider"></span>
                 </label>
             </div>
             <div className='settings_line'>
-                <span>Shutdown</span>
+                <span>{STRINGS.SETTINGS.SHUTDOWN}</span>
                 <button className='settings_button' onClick={handleShutdown} >
-                    <img src={require("../assets/shutdown-icon.png")} alt="Shutdown"/>
+                    <img src={require("../../assets/shutdown-icon.png")} alt={STRINGS.SETTINGS.SHUTDOWN}/>
                 </button>
             </div>
             <div className='settings_line'>
-                <span>Suspend</span>
+                <span>{STRINGS.SETTINGS.SUSPEND}</span>
                 <button className='settings_button' onClick={handleSuspend} >
-                    <img src={require("../assets/pause-icon.png")} alt="Shutdown"/>
+                    <img src={require("../../assets/pause-icon.png")} alt={STRINGS.SETTINGS.SUSPEND}/>
                 </button>
             </div>
         </div>

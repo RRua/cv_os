@@ -1,6 +1,6 @@
 
 import WindowAppBar from "./WindowAppBar";
-import '../styles/view/TerminalWindowFrame.css';
+import '../styles/view/AppWindow.css';
 import React, { useState, useRef, cloneElement, useEffect } from 'react';
 import Draggable from 'react-draggable';
 import { ResizableBox } from 'react-resizable';
@@ -56,7 +56,7 @@ function AppWindow({itemKey, title, onWindowClose, children}) {
     return(
       
         <Draggable handle=".app_window" 
-          cancel=".bar_button .term_content .file_line folder_content"
+          cancel=".bar_button .term_content .file_line .folder_content"
           bounds="parent"
           >
             <ResizableBox
@@ -66,7 +66,7 @@ function AppWindow({itemKey, title, onWindowClose, children}) {
               minConstraints={[size.width, size.height]}
               maxConstraints={[size.width * 100, size.height * 100]}
               resizeHandles={isMinimized ? [] : ["sw" , "se" , "ne"]} 
-              style={{border: '2px solid #0000', position: 'relative', 'pointer-events': 'auto'}}
+              style={{border: '2px solid #0000', position: 'relative', 'pointerEvents': 'auto'}}
             >
               <div ref={contentRef} className="app_window" style={{height: isMinimized? 'fit-content' : '100%'}}  onClick={handleContainerClick}>
                   <WindowAppBar title={title} 

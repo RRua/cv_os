@@ -6,15 +6,16 @@ import DesktopArea from './view/DesktopArea';
 import TerminalApp from './view/TerminalApp';
 import OpenWindowsSpace from './view/OpenWindowsSpace';
 import {data} from './data/data.js';
-import SettingsApp from './view/SettingsApp';
+import SettingsApp from './view/apps/SettingsApp.js';
+import { STRINGS } from './constants/strings.js';
 
 
 const SuspendedScreen = ({onLogin}) => {
   return (
     <div className="suspended_screen">
       <img src={require('./assets/user-icon.png')} alt="user profile"></img>
-      <h1>Welcome CvTerminal OS User</h1>
-      <button onClick={onLogin}>LogIn</button>
+      <h1>{STRINGS.SUSPENDED_SCREEN.WELCOME_MESSAGE}</h1>
+      <button onClick={onLogin}>{STRINGS.SUSPENDED_SCREEN.LOGIN_BUTTON}</button>
     </div>
   )
 }
@@ -25,8 +26,9 @@ function App() {
   const [suspended, setSuspended] = useState(false);
  
   const addApp = (id, title, app) => {
+    const count = windowApps.length;
     const newApp = (
-      <AppWindow key={windowApps.length} itemKey={windowApps.length} title={title} onWindowClose={popApp}>
+      <AppWindow key={count} itemKey={windowApps.length} title={title} onWindowClose={popApp}>
         {app}
       </AppWindow>
     );

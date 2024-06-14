@@ -1,25 +1,29 @@
-import '../styles/view/TerminalWindowFrame.css';
+import '../styles/view/Terminal.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { find_key } from '../terminal_commands/Commands';
 import { nixCommands } from '../terminal_commands/NixCommands';
 import {replaceLastOccurrence} from '../utils/utils';
 import { SocialsCommand } from '../terminal_commands/CustomCommands';
+import { STRINGS } from '../constants/strings';
+
+
+const buildWelcomeString = (dirname) => {
+  return STRINGS.TERMINAL.PROMP_STRING_PREFIX + dirname + "$ "
+}
 
 function TerminalApp({itemKey, inputRef, onWindowClose, fs }) {
-  const promptStringPrefix = 'cv@rrua:';
-  const welcomeMessage = "Welcome to the Terminal interface of the CV OS, built by Rui Rua. To know which commands are available, use the help command.";
   const [currDir, setcurrDir] = useState('~');
-  const [promptString, setPromptString] = useState( promptStringPrefix + currDir + '$ ' );
+  const [promptString, setPromptString] = useState(buildWelcomeString(currDir));
   const [input, setInput] = useState('');
   const [data, setData] = useState(fs);
-  const [output, setOutput] = useState([welcomeMessage]);
+  const [output, setOutput] = useState([STRINGS.TERMINAL.WELCOME_MESSAGE]);
   const outputRef = useRef(null);
   const [command_history, setCommandHistory] = useState([]);
-  const [command_history_index, setCommandHistoryIndex] = useState(-1); // Initialize to -1
+  const [command_history_index, setCommandHistoryIndex] = useState(-1);
   const [cursorPosition, setCursorPosition] = useState(0);
   const commands = {
-    help: 'Display available commands and their descriptions',
-    history: 'Display command history',
+    help: STRINGS.TERMINAL.HELP_COMMAND,
+    history:  STRINGS.TERMINAL.HISTORY_COMMAND,
     clear: new nixCommands.ClearCommand(),
     exit: new nixCommands.ExitCommand(),
     ls: new nixCommands.LsCommand(),
@@ -28,12 +32,12 @@ function TerminalApp({itemKey, inputRef, onWindowClose, fs }) {
     pwd: new nixCommands.PwdCommand(),
     socials : new SocialsCommand(),
   };
-
+  
   const updateData = (newData, currDirName) => {
     setData(newData);
     const currDir = currDirName ? currDirName : '~ ';
     setcurrDir(currDir);
-    setPromptString(promptStringPrefix + currDir + '$ ');
+    setPromptString(buildWelcomeString(currDir));
   };
 
   const updateCursorPosition = () => {
@@ -59,14 +63,12 @@ function TerminalApp({itemKey, inputRef, onWindowClose, fs }) {
       var matchingCandidate = Object.keys(commands).find((c) =>
         c.startsWith(input.split(' ')[input.split(' ').length - 1])
       );
-      console.log('match candidate', matchingCandidate);
       if (!matchingCandidate) {
         const str_to_complete = input.slice(0, cursorPosition).split(' ')[input.slice(0, cursorPosition).split(' ').length - 1];
         const candidate = find_key(str_to_complete, data, true);
         if (!candidate){
           return;
         }
-        console.log('candidate', candidate);
         const completedInput = replaceLastOccurrence(input.slice(0, cursorPosition),str_to_complete, candidate);
         const remainingInput = input.slice(cursorPosition+1);
         const modifiedInput = completedInput + remainingInput;
@@ -139,9 +141,13 @@ function TerminalApp({itemKey, inputRef, onWindowClose, fs }) {
 
   return (
     <div className="term_content" ref={outputRef}>
-      <div className="output" onMouseDown={handleMouseDown} >
+      <div className="output" >
         {output.map((line, index) => (
-          <div className="output_line selectable" key={index} onMouseDown={handleMouseDown}>
+          <div className="output_line selectable" key={index}
+            onClick={handleMouseDown}
+            onMouseUp={handleMouseDown}
+            onMouseDown={handleMouseDown}
+          >
             {line || <>&nbsp;</>}
           </div>
         ))}

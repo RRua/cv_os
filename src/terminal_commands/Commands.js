@@ -51,7 +51,6 @@ export function transformToTableWithHeader(objects) {
 
 
 export function retrieveObjectsAsString(objects) {
-  console.log('objects', objects);
   const ret = [];
   for (const obj of objects) {
     ret.push('-----------------------')
@@ -74,7 +73,6 @@ export function retrieveObjectsAsString(objects) {
 }
 
 export function find_key(target_str, fs, match_prefix=false) {
-  console.log('fs', fs);
   if (!fs) {
     return null;
   }
@@ -83,7 +81,6 @@ export function find_key(target_str, fs, match_prefix=false) {
     return find_key(target_str, find_root(fs), match_prefix);
   }
   if (target_str.startsWith('../') && fs.parentDirectory) {
-    console.log("panasca", target_str);
     fs = fs.parentDirectory ? fs.parentDirectory : fs;
     target_str = target_str.slice(3);
     const res = find_key(target_str, fs, match_prefix);
@@ -115,7 +112,6 @@ export function find_key(target_str, fs, match_prefix=false) {
   }
   else {
     if (fs instanceof Directory) {
-      console.log('fs', fs);
       const currentObj = fs.content.find((obj) => find_id(obj).toUpperCase() === target_str.toUpperCase()
        || (match_prefix && find_id(obj).toUpperCase().startsWith(target_str.toUpperCase())));
       return !find_id(currentObj) ? null : target_str !== '' ? find_id(currentObj) : null;
@@ -141,12 +137,10 @@ export function find_obj(target_str, fs) {
   if (target_str.startsWith('/') || target_str.startsWith('~/')) {
     fs = find_root(fs);
     target_str = target_str.startsWith('/') ? target_str.slice(1) : target_str.slice(2);
-    console.log('fs', fs);
   }
   if (target_str.startsWith('../')) {
     fs = fs.parentDirectory ? fs.parentDirectory : fs;
     target_str = target_str.slice(2);
-    console.log('fs', fs);
   }
   if (target_str.includes('/')) {
     const path = target_str.split('/');
@@ -195,7 +189,6 @@ export function find_id(obj) {
   if (obj instanceof Directory) {
     return obj.name;
   }
-  console.log('obj', obj);
   for (const key in obj) {
     if (key === 'parentDirectory') {
       continue;

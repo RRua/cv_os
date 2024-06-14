@@ -1,9 +1,10 @@
 import {React, useState} from 'react';
-//import DesktopIcon from './DesktopIcon';
-import '../styles/view/AppFolder.css';
-import ReadOnlyTextFileApp from './ReadOnlyTextFileApp';
-import { iconImgFromType, getFilesURL} from '../utils/utils';
-import { Directory } from '../data/data';
+import '../../styles/view/AppFolder.css';
+import '../../styles/view/TextFile.css';
+import ReadOnlyTextFileApp from '../TextFileApp';
+import { iconImgFromType, getFilesURL} from '../../utils/utils';
+import { Directory } from '../../data/data';
+import { STRINGS } from '../../constants/strings';
 
 
 class ViewType {
@@ -24,7 +25,9 @@ const Listbox = ({ options, onSelect, default_text="Select attribute"}) => {
     };
 
     return (
-        <select className='top_bar_select' value={selectedOption} onChange={handleChange}>
+        <select className='top_bar_select'
+            onClick={(e) => e.stopPropagation()}
+            value={selectedOption} onChange={handleChange}>
             <option value="">{default_text}</option>
             {options.map((option, index) => (
                 <option key={index} value={option}>
@@ -56,11 +59,9 @@ const AppFolder = ({name, openApp, data, view_type=ViewType.List, searchBar=true
     const [currData, setCurrData] = useState(data);
     const [inputValue, setInputValue] = useState('');
     const [selectedOption, setSelectedOption] = useState('');
-    const default_text = "Select attribute";
     const [options, setOptions] = useState([]); 
 
     const getOptionsOnData = (data) => {
-        console.log("data", data);
         if (data.content.length === 0) {
                 return options;
         }
@@ -101,22 +102,23 @@ const AppFolder = ({name, openApp, data, view_type=ViewType.List, searchBar=true
         setDataToShow(filteredData);
     }
 
-    console.log("toshow",dataToShow);
+    
 
     return (
         <div className='folder_content'>
            {searchBar && 
                 <div className="folder_top_bar">
-                    <button className="file_buttons" 
+                    <button className="file_button" 
+                        disabled={!currData.parentDirectory}
                         onClick={() => {
                             setDataToShow(currData.parentDirectory ? currData.parentDirectory.content : dataToShow);
                             setCurrData(currData.parentDirectory? currData.parentDirectory : currData);
                             }
                         }>
-                    Back
+                    {STRINGS.APP_FOLDER.BACK_BUTTON}
                     </button>
-                    <Listbox options={getOptionsOnData(currData)} onSelect={handleSelect} default_text={default_text} />
-                    <input value={inputValue} type="text" placeholder="Search..." onChange={handleInputChange} />
+                    <Listbox options={getOptionsOnData(currData)} onSelect={handleSelect} default_text={STRINGS.APP_FOLDER.SELECT_TEXT} />
+                    <input value={inputValue} type="text" placeholder={STRINGS.APP_FOLDER.SEARCH_PLACEHOLDER} onChange={handleInputChange} />
                     {/*<button><img className='top_bar_img' src={require("../assets/search-icon.png")}></img></button>*/}
                 </div>  
             }
@@ -136,11 +138,11 @@ const AppFolder = ({name, openApp, data, view_type=ViewType.List, searchBar=true
                                     openApp(file.name, file.name,
                                         <ReadOnlyTextFileApp file={file} 
                                         buttonInfo={ file.content.url? {
-                                            text: "Open",
+                                            text: STRINGS.APP_FOLDER.OPEN_BUTTON,
                                             onclick: () => {window.open(`${getFilesURL()}/${file.filename}`, "_blank")}
                                         }: null}
                                         onBackInfo={{
-                                            text: "Back",
+                                            text: STRINGS.APP_FOLDER.BACK_BUTTON,
                                             onclick: () => {openApp(name, name, <AppFolder name={name} openApp={openApp} data={currData} view_type={ViewType.List}/>)}
                                         }}/>)
                                     }
