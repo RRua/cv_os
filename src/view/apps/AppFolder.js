@@ -105,7 +105,7 @@ const AppFolder = ({name, openApp, data, view_type=ViewType.List, searchBar=true
     
 
     return (
-        <div className='folder_content'>
+        <div className="folder_content need_interaction">
            {searchBar && 
                 <div className="folder_top_bar">
                     <button className="file_button" 

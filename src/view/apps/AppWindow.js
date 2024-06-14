@@ -56,13 +56,14 @@ function AppWindow({itemKey, title, onWindowClose, children}) {
     return(
       
         <Draggable handle=".app_window" 
-          cancel=".bar_button .term_content .file_line .folder_content"
+          cancel=".need_interaction"
           bounds="parent"
           >
             <ResizableBox
               axis="both"
               width={isMinimized ? 'fit-content' : size.width}
               height={size.height}
+              onMouseDown={(e) => e.stopPropagation()}
               minConstraints={[size.width, size.height]}
               maxConstraints={[size.width * 100, size.height * 100]}
               resizeHandles={isMinimized ? [] : ["sw" , "se" , "ne"]} 

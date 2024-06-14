@@ -140,7 +140,7 @@ function TerminalApp({itemKey, inputRef, onWindowClose, fs }) {
   };
 
   return (
-    <div className="term_content" ref={outputRef}>
+    <div className="term_content need_interaction" ref={outputRef}>
       <div className="output" >
         {output.map((line, index) => (
           <div className="output_line selectable" key={index}

@@ -2,8 +2,8 @@
 
 .folder_content {
   cursor: default;
-  overflow-y: auto; /* Enable vertical scrolling */
-  flex-grow: 1; /* Allow the folder_content to grow within the container */
+  overflow-y: auto;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-content: flex-start;
@@ -48,7 +48,7 @@
 
 
 .folder_top_bar input::placeholder {
-  color: gray; /* Set the placeholder text color to gray */
+  color: gray;
 }
 .folder_top_bar button {
   background-color: var(--window-color);

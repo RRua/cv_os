@@ -15,7 +15,7 @@ function SettingsApp({onSuspend, onShutdown}) {
       };
 
     return (
-        <div className="settings">
+        <div className="settings need_interaction">
             <div className='settings_line'>
                 <span>{STRINGS.SETTINGS.DARK_MODE}</span>
                 <label className="toggle-switch">

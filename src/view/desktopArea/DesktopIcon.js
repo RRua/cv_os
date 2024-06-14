@@ -12,8 +12,8 @@ const DesktopIcon = ({ icon}) => {
   }
 
   return (
-    <Draggable handle=".desktop_icon">
-        <div className="desktop_icon"
+    <Draggable cancel='.need_interaction' handle=".desktop_icon" onMouseDown={(e)=> e.stopPropagation()}>
+        <div className="desktop_icon need_interaction"
              onMouseEnter={() => setShowTooltip(true)}
              onMouseLeave={() => setShowTooltip(false)}
             onClick={(e) => handleClick(e, icon.onclick)}>
