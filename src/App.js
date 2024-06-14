@@ -20,6 +20,13 @@ const SuspendedScreen = ({onLogin}) => {
   )
 }
 
+const Octocat = () => {
+  return (
+    <a className="octocat" href="https://github.com/RRua/terminal_cv">
+      <img className="octocat" src={require('./assets/octocat.png')} alt="GitHub"></img>
+    </a>);
+}
+
 
 function App() {
   const [windowApps, setWindowApps] = useState([]);
@@ -85,6 +92,7 @@ function App() {
             <OpenWindowsSpace>
               {windowApps}
             </OpenWindowsSpace>
+            <Octocat></Octocat>
             <Dock icons={defaultIcons}/>
           </div>
   
