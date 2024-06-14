@@ -18,7 +18,7 @@ function ReadOnlyTextFileApp({file, buttonInfo, onBackInfo}) {
       };
 
     return (
-        <div className="file_window">
+        <div className="file_window need_interaction">
             <div className="file_top_buttons">
                 {onBackInfo && 
                     <button className="file_button" 
