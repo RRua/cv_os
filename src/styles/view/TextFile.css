@@ -3,28 +3,29 @@
 .file_window {
     min-width: 35%;
     font-family: 'Courier New', Courier, monospace;
-    overflow: scroll;  
     cursor: move; 
     z-index: 2;
     display: flex;
     flex-direction: column;
-    overflow-wrap: normal;
     max-height: 99vh;
+    border: 2px solid #d62929;
+    flex: 1;
+    height: 70%;
     background-color: var(--background-color);
 
 }
 
 .file_content {
-    min-height: 30vh;
+    min-height: 10vh;
     max-height: 95vh;
     width: 100%;
     max-width: 100vw;
-    height: 100%;
     cursor: text;
     text-align: left;
     overflow: scroll;
+    overflow-wrap: normal;
     background-color: var(--background-color);
-
+    box-sizing: border-box;
 }
 
 .file_line{
