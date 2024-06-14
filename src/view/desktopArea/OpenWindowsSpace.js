@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/view/OpenWindowsSpace.css';
+import '../../styles/view/OpenWindowsSpace.css';
 
 
 const OpenWindowsSpace = ({ children }) => {

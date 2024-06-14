@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './styles/App.css';
-import AppWindow from './view/AppWindow';
+import AppWindow from './view/apps/AppWindow.js';
 import Dock from './view/dock/Dock';
-import DesktopArea from './view/DesktopArea';
-import TerminalApp from './view/TerminalApp';
-import OpenWindowsSpace from './view/OpenWindowsSpace';
+import DesktopArea from './view/desktopArea/DesktopArea.js';
+import TerminalApp from './view/apps/TerminalApp.js';
+import OpenWindowsSpace from './view/desktopArea/OpenWindowsSpace.js';
 import {data} from './data/data.js';
 import SettingsApp from './view/apps/SettingsApp.js';
 import { STRINGS } from './constants/strings.js';
@@ -55,22 +55,23 @@ function App() {
         alt: 'Terminal',
         onclick: () => {addApp(windowApps.length, 'Terminal', <TerminalApp fs={data}/>)}
     },
+    {   src: require('./assets/settings-icon.png'),
+      alt: 'Settings',
+      onclick: () => addApp(windowApps.length, 'Settings', <SettingsApp onShutdown={onShutdown} onSuspend={onSuspend}/>)
+    },
+    
     { src: require('./assets/pdf-icon.png'), alt: 'CV (pdf)',
-      onclick: () => window.open('https://rrua.github.io/files/CV_RuiRua_24.pdf') 
+      onclick: () => window.open(STRINGS.DOCK.CV_LINK) 
      },
     { 
       src: require('./assets/academic-icon.png'),
       alt: 'Academic Personal Website',
-      onclick: () => window.open('https://rrua.github.io/') 
+      onclick: () => window.open(STRINGS.DOCK.PERSONAL_WEBSITE_LINK) 
     },
     {   src: require('./assets/linktree-icon.png'),
-        alt: 'linktree (Links)',
-        onclick: () => window.open('https://linktr.ee/ruirua')
+        alt: 'Linktree (Other Links)',
+        onclick: () => window.open(STRINGS.DOCK.LINKTREE_LINK)
     },
-    {   src: require('./assets/settings-icon.png'),
-      alt: 'Settings',
-      onclick: () => addApp(windowApps.length, 'Settings', <SettingsApp onShutdown={onShutdown} onSuspend={onSuspend}/>)
-  }
   ];
 
   return ( 

@@ -1,4 +1,4 @@
-import '../styles/view/AppWindow.css';
+import '../../styles/view/AppWindow.css';
 
 
 function WindowAppBar({title, isMaximized, onClose, onMinimize, onMaximize}) {

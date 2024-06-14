@@ -1,6 +1,6 @@
 
 import WindowAppBar from "./WindowAppBar";
-import '../styles/view/AppWindow.css';
+import '../../styles/view/AppWindow.css';
 import React, { useState, useRef, cloneElement, useEffect } from 'react';
 import Draggable from 'react-draggable';
 import { ResizableBox } from 'react-resizable';

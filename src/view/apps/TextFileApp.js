@@ -1,6 +1,6 @@
 
-import { STRINGS } from '../constants/strings';
-import '../styles/view/TextFile.css';
+import { STRINGS } from '../../constants/strings';
+import '../../styles/view/TextFile.css';
 import React from 'react';
 
 

@@ -1,10 +1,10 @@
-import '../styles/view/Terminal.css';
+import '../../styles/view/Terminal.css';
 import React, { useState, useEffect, useRef } from 'react';
-import { find_key } from '../terminal_commands/Commands';
-import { nixCommands } from '../terminal_commands/NixCommands';
-import {replaceLastOccurrence} from '../utils/utils';
-import { SocialsCommand } from '../terminal_commands/CustomCommands';
-import { STRINGS } from '../constants/strings';
+import { find_key } from '../../terminal_commands/Commands';
+import { nixCommands } from '../../terminal_commands/NixCommands';
+import {replaceLastOccurrence} from '../../utils/utils';
+import { SocialsCommand } from '../../terminal_commands/CustomCommands';
+import { STRINGS } from '../../constants/strings';
 
 
 const buildWelcomeString = (dirname) => {

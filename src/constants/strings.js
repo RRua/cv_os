@@ -22,4 +22,9 @@ export const STRINGS = {
         WELCOME_MESSAGE: 'Welcome CV OS User',
         LOGIN_BUTTON: 'LogIn',
     },
+    DOCK: {
+       CV_LINK: 'https://rrua.github.io/files/CV_RuiRua_24.pdf',
+       LINKTREE_LINK : "https://linktr.ee/ruirua",
+       PERSONAL_WEBSITE_LINK: 'https://rrua.github.io/',
+    }
 }

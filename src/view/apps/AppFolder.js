@@ -1,7 +1,7 @@
 import {React, useState} from 'react';
 import '../../styles/view/AppFolder.css';
 import '../../styles/view/TextFile.css';
-import ReadOnlyTextFileApp from '../TextFileApp';
+import ReadOnlyTextFileApp from './TextFileApp';
 import { iconImgFromType, getFilesURL} from '../../utils/utils';
 import { Directory } from '../../data/data';
 import { STRINGS } from '../../constants/strings';

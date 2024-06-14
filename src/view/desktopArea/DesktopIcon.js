@@ -1,12 +1,11 @@
 import {React, useState} from 'react';
-import '../styles/view/Desktop.css';
+import '../../styles/view/Desktop.css';
 import Draggable from 'react-draggable';
-import { iconImgFromType } from '../utils/utils';
+import { iconImgFromType } from '../../utils/utils';
 
 const DesktopIcon = ({ icon}) => {
   const [showTooltip, setShowTooltip] = useState(false);
   const handleClick = (e, f) => {
-    
     if (f){
       f();
     } 
