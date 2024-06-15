@@ -9,7 +9,7 @@ const iconImgFromType = (icon_type) => {
 }
 
 const getFilesURL = () => {
-    return "http://localhost:3000/files"
+    return process.env.PUBLIC_URL + "/data/files";
 }
     
 function replaceLastOccurrence(originalStr, searchStr, replaceStr) {

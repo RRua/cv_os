@@ -1,13 +1,13 @@
 
-import publications from './publications.json';
-import certifications from './certifications.json';
-import software from './software.json';
-import skills from './skills.json';
-import teaching from './teaching.json';
-import scientific_activities from './scientific_activities.json';
-import hobbies  from './hobbies.json';
-import socials from './socials.json';
-import contributing from './contributing.json';
+import publications from './files/publications.json';
+import certifications from './files/certifications.json';
+import software from './files/software.json';
+import skills from './files/skills.json';
+import teaching from './files/teaching.json';
+import scientific_activities from './files/scientific_activities.json';
+import hobbies  from './files/hobbies.json';
+import socials from './files/socials.json';
+import contributing from './files/contributing.json';
 
 class Directory {
     constructor(name, parentDirectory, content=[]) {
@@ -26,13 +26,14 @@ class Directory {
 }
 
 class File {
-    constructor(id, content, parentDirectory=null) {
+    constructor(id, content, parentDirectory=null, format='md') {
         this.name = id;
         this.content = content;
         this.parentDirectory = parentDirectory;
+        this.format = format;
     }
     clone() {
-        return new File(this.name, this.content, this.parentDirectory);
+        return new File(this.name, this.content, this.parentDirectory, this.format);
     }
 }
 
@@ -55,22 +56,28 @@ function inferName(data){
     return data.title || data.name || data.filename || data.id;
 }
 
-const data = new Directory('root', null);
-data.addContent(loadData('publications', publications, data));
-data.addContent(loadData('certifications', certifications, data));
-const skillsDir = new Directory('skills', data);
-skillsDir.content = Object.keys(skills).map((item) => loadData(item, skills[item], skillsDir));
-data.addContent(skillsDir);
-data.addContent(loadData('software', software, data));
-const teachingDir = new Directory('teaching', data);
-teachingDir.content = Object.keys(teaching).map((item) => loadData(item, teaching[item], teachingDir));
-data.addContent(teachingDir);
-const scientificDir = new Directory('scientific_activities', data);
-scientificDir.content = Object.keys(scientific_activities).map((item) => loadData(item, scientific_activities[item], scientificDir));
-data.addContent(scientificDir);
-data.addContent(loadData('hobbies', hobbies, data));
-data.addContent(loadData('socials', socials, data));
-data.addContent(loadData('contributing.md', contributing, data));
+
+function loadAppData(){
+    let data = new Directory('root', null);
+    data.addContent(loadData('publications', publications, data));
+    data.addContent(loadData('certifications', certifications, data));
+    const skillsDir = new Directory('skills', data);
+    skillsDir.content = Object.keys(skills).map((item) => loadData(item, skills[item], skillsDir));
+    data.addContent(skillsDir);
+    data.addContent(loadData('software', software, data));
+    const teachingDir = new Directory('teaching', data);
+    teachingDir.content = Object.keys(teaching).map((item) => loadData(item, teaching[item], teachingDir));
+    data.addContent(teachingDir);
+    const scientificDir = new Directory('scientific_activities', data);
+    scientificDir.content = Object.keys(scientific_activities).map((item) => loadData(item, scientific_activities[item], scientificDir));
+    data.addContent(scientificDir);
+    data.addContent(loadData('hobbies', hobbies, data));
+    data.addContent(loadData('socials', socials, data));
+    data.addContent(loadData('contributing.md', contributing, data));
+    return data;
+}
+
+const data = loadAppData();
 
 
 export {data, Directory, File};

@@ -1,7 +1,7 @@
 import {React, useState} from 'react';
 import '../../styles/view/AppFolder.css';
 import '../../styles/view/TextFile.css';
-import ReadOnlyTextFileApp from './TextFileApp';
+import FileApp from './FileApp';
 import { iconImgFromType, getFilesURL} from '../../utils/utils';
 import { Directory } from '../../data/data';
 import { STRINGS } from '../../constants/strings';
@@ -136,7 +136,7 @@ const AppFolder = ({name, openApp, data, view_type=ViewType.List, searchBar=true
                                 }
                                 else {
                                     openApp(file.name, file.name,
-                                        <ReadOnlyTextFileApp file={file} 
+                                        <FileApp file={file} 
                                         buttonInfo={ file.content.url? {
                                             text: STRINGS.APP_FOLDER.OPEN_BUTTON,
                                             onclick: () => {window.open(`${getFilesURL()}/${file.filename}`, "_blank")}

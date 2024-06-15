@@ -2,16 +2,44 @@
 import { STRINGS } from '../../constants/strings';
 import '../../styles/view/TextFile.css';
 import React from 'react';
+import Markdown from 'react-markdown'
+const json2md = require("json2md")
 
-
-function ReadOnlyTextFileApp({file, buttonInfo, onBackInfo}) {
-    const keysToIgnore = []; //['filename'];
+function MarkdownFileApp({file, buttonInfo, onBackInfo}) {
+    const keysToIgnore = ['filename'];
     const filteredContent = Object.keys(file.content).reduce((acc, key) => {
         if (!keysToIgnore.includes(key)){
             acc[key] = file.content[key];
         }
         return acc;
     }, {});
+
+    const markdown = `is a markdown component for React.
+
+👉 Changes are re-rendered as you type.
+
+👈 Try writing some markdown on the left.
+
+## Overview
+
+* Follows [CommonMark](https://commonmark.org)
+* Optionally follows [GitHub Flavored Markdown](https://github.github.com/gfm/)
+* Renders actual React elements instead of using
+* Has a lot of plugins
+
+## Contents
+
+Here is an example of a plugin in action
+([remark-toc](https://github.com/remarkjs/remark-toc)).
+**This section is replaced by an actual table of contents**.
+
+## Syntax highlighting
+
+Here is an example of a plugin to highlight code:
+[rehype-highlight](https://github.com/rehypejs/rehype-highlight).
+
+`;
+
     
     const handleMouseDown = (event) => {
         event.stopPropagation(); // Prevent the drag event from being triggered
@@ -32,19 +60,11 @@ function ReadOnlyTextFileApp({file, buttonInfo, onBackInfo}) {
                 }
             </div>
             <div className="file_content">
-                <div className="file_output" onMouseDown={handleMouseDown} >
-                    {Object.keys(filteredContent).map((key, index) => (
-                        <p key={index} className="file_line">
-                            <strong>{key}: </strong>{Array.isArray(filteredContent[key]) 
-                                ? filteredContent[key].join(", ") : filteredContent[key]}
-                        </p>
-                    
-                    ))}
-                </div>
+                <Markdown>{markdown}</Markdown>
             </div>
         </div> 
     );
 }
 
-export default ReadOnlyTextFileApp;
+export default MarkdownFileApp;
 
