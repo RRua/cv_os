@@ -2,13 +2,12 @@
 
 .file_window {
     min-width: 35%;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'source-code-pro', Courier, monospace;
     cursor: move; 
     z-index: 2;
     display: flex;
     flex-direction: column;
     max-height: 99vh;
-    border: 2px solid #d62929;
     flex: 1;
     height: 70%;
     background-color: var(--background-color);
@@ -26,6 +25,7 @@
     overflow-wrap: normal;
     background-color: var(--background-color);
     box-sizing: border-box;
+    padding: 1%;
 }
 
 .file_line{
@@ -60,4 +60,5 @@
    border: 1px solid #ffff;
    color: var(--text-color);
    background-color: var(--window-color);
+   cursor: pointer;
 }
