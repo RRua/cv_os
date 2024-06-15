@@ -7,7 +7,7 @@
   width: 100vw;
   display: flex;
   color: var(--text-color);
-  background: linear-gradient(45deg, #d14114, #77116f, #512750, #2a001e, #5e2750, #77216f);
+  background: linear-gradient(45deg, #af3a16, #77116f, #512750, #2a001e, #5e2750, #77216f);
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -43,8 +43,13 @@
 
 .octocat {
   position: fixed;
-  bottom: 10px;
-  right: 10px;
-  height: max(10%, 80px);
-  width: max(8%, 80px);
+  bottom: 3px;
+  left: 1px;
+  width: 70px;
+  height: 70px;
+  transition: transform 0.3s;
+}
+
+.octocat:hover  {
+  transform: scale(1.1);
 }
