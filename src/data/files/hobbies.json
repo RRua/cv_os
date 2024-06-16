@@ -1,22 +1,23 @@
 [
     {
-        "id": "Brazilian Jiu-Jitsu", 
-        "role": "practicioner",
+        "name": "Brazilian Jiu-Jitsu", 
+        "current role": "practicioner",
         "frequency": "2x/week"
     },
     {
-        "id": "Bodybuilding",
-        "role": "practicioner",
+        "name": "Bodybuilding",
+        "current role": "practicioner",
         "frequency": "5x/week"
     },
     {
-        "id": "Reading",
-        "role": "practicioner",
+        "name": "Reading",
+        "current role": "practicioner",
         "frequency": "5x/week"
     },
     {
-        "id": "Football",
-        "role": "fan",
-        "frequency": "1x/week"
+        "name": "Football",
+        "current role": "fan",
+        "frequency": "1x/week",
+        "past role": "practicioner"
     }
 ]

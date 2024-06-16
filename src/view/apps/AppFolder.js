@@ -139,7 +139,7 @@ const AppFolder = ({name, openApp, data, view_type=ViewType.List, searchBar=true
                                         <FileApp file={file} 
                                         buttonInfo={ file.content.url? {
                                             text: STRINGS.APP_FOLDER.OPEN_BUTTON,
-                                            onclick: () => {window.open(`${getFilesURL()}/${file.filename}`, "_blank")}
+                                            onclick: () => {window.open(file.content.url? file.content.url : `${getFilesURL()}/${file.content.filename}`, "_blank")}
                                         }: null}
                                         onBackInfo={{
                                             text: STRINGS.APP_FOLDER.BACK_BUTTON,

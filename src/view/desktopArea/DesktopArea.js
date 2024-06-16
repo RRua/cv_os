@@ -17,9 +17,9 @@ function DesktopArea({onAppOpen, data}) {
                     }
                     else {
                         onAppOpen(key, key, <FileApp file={value} 
-                            buttonInfo={ value.content.url? {
+                            buttonInfo={ (value.content.url || value.content.filename)? {
                                 text: "Open",
-                                onclick: () => {window.open(`${getFilesURL()}/${value.url}`, "_blank")}
+                                onclick: () => {window.open(value.content.url ? value.className.url : `${getFilesURL()}/${value.content.filename}`, "_blank")}
                                 }
                             : null
                             }/>)
