@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/cv_os/static/css/main.565cdca6.css",
-    "main.js": "/cv_os/static/js/main.ddb46178.js",
-    "static/media/octocat.png": "/cv_os/static/media/octocat.3e264aba5c92d1a2dc78.png",
-    "static/media/pdf-icon.png": "/cv_os/static/media/pdf-icon.666ee1b4ac9eb31bd955.png",
-    "static/media/academic-icon.png": "/cv_os/static/media/academic-icon.536aead5d42c99f6a44b.png",
-    "service-worker.js": "/cv_os/service-worker.js",
-    "static/media/user-icon.png": "/cv_os/static/media/user-icon.8d49e377c7c342895ec2.png",
-    "static/media/terminal-icon.png": "/cv_os/static/media/terminal-icon.a695be0b97e70962e513.png",
-    "index.html": "/cv_os/index.html",
-    "main.565cdca6.css.map": "/cv_os/static/css/main.565cdca6.css.map",
-    "main.ddb46178.js.map": "/cv_os/static/js/main.ddb46178.js.map"
+    "main.css": "/rrua_cv_os/static/css/main.565cdca6.css",
+    "main.js": "/rrua_cv_os/static/js/main.5dcce3e1.js",
+    "static/media/octocat.png": "/rrua_cv_os/static/media/octocat.3e264aba5c92d1a2dc78.png",
+    "static/media/pdf-icon.png": "/rrua_cv_os/static/media/pdf-icon.666ee1b4ac9eb31bd955.png",
+    "static/media/academic-icon.png": "/rrua_cv_os/static/media/academic-icon.536aead5d42c99f6a44b.png",
+    "service-worker.js": "/rrua_cv_os/service-worker.js",
+    "static/media/user-icon.png": "/rrua_cv_os/static/media/user-icon.8d49e377c7c342895ec2.png",
+    "static/media/terminal-icon.png": "/rrua_cv_os/static/media/terminal-icon.a695be0b97e70962e513.png",
+    "index.html": "/rrua_cv_os/index.html",
+    "main.565cdca6.css.map": "/rrua_cv_os/static/css/main.565cdca6.css.map",
+    "main.5dcce3e1.js.map": "/rrua_cv_os/static/js/main.5dcce3e1.js.map"
   },
   "entrypoints": [
     "static/css/main.565cdca6.css",
-    "static/js/main.ddb46178.js"
+    "static/js/main.5dcce3e1.js"
   ]
 }
