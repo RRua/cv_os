@@ -2,7 +2,7 @@
 
 CV OS is an open-source project designed to present résumés in the appearance of an operating system. It offers navigation through directories and files via a desktop environment and a command-line interface through the Terminal app.
 
-This project was built using React. Its content is easily configurable, allowing for easy reuse by the community. It is designed to be easily deployed using GitHub Pages. To reuse it, simply fork the project and follow the instructions below.
+This project was built as PWA using React. Furthermore, it can also be installed on any device via browser. Its content is easily configurable, allowing for easy reuse by the community. It is designed to be easily deployed using GitHub Pages. To reuse it, simply fork the project and follow the instructions below.
 
 ## Reusing the Project
 
