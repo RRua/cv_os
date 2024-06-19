@@ -1,29 +1,75 @@
 {
     "languages": [
         {
+            "title": "Python",
+            "type": "Programming Language",
+            "frameworks": "Django",
+            "libraries": "Pandas, Numpy, Scykit, Scrapy",
+            "start": "2019",
+            "years": 5
+        },
+        {
+            "title": "Java",
+            "type": "Programming Language",
+            "frameworks": "Android, Spring, Hibernate",
+            "start": "2015",
+            "years": 10
+        },
+        {
             "title": "JavaScript-TypeScript",
             "type": "Programming Language",
             "frameworks": "React, React Native, Node",
             "start": "2020",
-            "years": 4,
-            "filename": "js-ts"
+            "years": 4
         },
         {
             "title": "SQL",
             "type": "Database Language",
             "engines": "MySQL, PostgreSQL, SQLite",
             "start": "2014",
-            "years": 10,
-            "filename": "sql"
+            "years": 10
+        },
+        {
+            "title": "C-C++",
+            "type": "Programming Language",
+            "libraries": "glib, ncurses",
+            "frameworks": "None",
+            "start": "2014",
+            "years": 10
+        },
+        {
+            "title": "Haskell",
+            "type": "Programming Language",
+            "frameworks": "None",
+            "libraries":"ncurses, gloss",
+            "start": "2014",
+            "years": 10
+        },
+        {
+            "title": "Solidity",
+            "type": "Programming Language",
+            "start": "2021",
+            "years": 3
         }
     ],
     "technologies": [
         {
+            "title": "Docker",
+            "type": "Containerization",
+            "start": "2021",
+            "years": 1
+        },
+        {
+            "title": "Kubernetes",
+            "type": "Container Orchestration",
+            "start": "2021",
+            "years": 1
+        },
+        {
             "title": "React Native",
             "type": "Cross-platform Development",
             "platforms": "Android, iOS",
-            "start": "2021",
-            "filename": "react-native"
+            "start": "2021"
         }
     ]
 }

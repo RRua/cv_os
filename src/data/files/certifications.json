@@ -1,19 +1,105 @@
 [
+    {
+        "filename": "android_udemy_complete.pdf",
+        "title": "The Complete Android Developer Course: Beginner To Advanced",
+        "platform": "Udemy",
+        "year": 2022,
+        "category": "Mobile Development"  
+    },
+    {
+        "filename": "eth_udemy_bootcamp.pdf",
+        "title": "Ethereum Blockchain Developer Bootcamp With Solidity (2022)",
+        "platform": "Udemy",
+        "year": 2022,
+        "category": "Blockchain"
+    },
+    {
+        "filename": "blockchain_udemy_complete.pdf",
+        "title": "Blockchain Engineer Training: The Complete Course!",
+        "platform": "Udemy",
+        "year": 2021,
+        "category": "Blockchain"
+    },
+    {   "filename": "solidity_udemy_master.pdf",
+        "title": "Master Ethereum & Solidity Programming From Scratch in 2022",
+        "platform": "Udemy",
+        "year": 2021,
+        "category": "Blockchain, Solidity"
+    },
+    {   
+        "title": "Introduction to Containers w/ Docker, Kubernetes & OpenShift",
+        "platform": "Coursera",
+        "issuer": "IBM",
+        "url": "https://www.coursera.org/account/accomplishments/verify/FVU9CPSTGMSM",
+        "year": 2024,
+        "category": "DevOps, Containers, Cloud, Orchestration"
+    },
+    {
+        "title": "Mobile Development and JavaScript",
+        "platform": "Coursera",
+        "issuer": "Meta",
+        "url": "https://www.coursera.org/account/accomplishments/certificate/ZQBB4APMBNFV",
+        "year": 2023
+    },
+    {
+        "title": "Mobile Development and JavaScript",
+        "platform": "Coursera",
+        "issuer": "Meta",
+        "url": "https://www.coursera.org/account/accomplishments/certificate/ZQBB4APMBNFV",
+        "year": 2023
+    },
+    {
+        "title": "JavaScript for Web Designers",
+        "platform": "LinkedIn",
+        "issuer": "LinkedIn",
+        "url": "https://www.linkedin.com/learning/certificates/4778f1d28a9fe13321adaf0b97404d6e139570c6fbaef94a349539722ba8c008",
+        "year": 2023,
+        "category": "Web Development, JavaScript"
+    },
+    {
+        "title": "Learning GitHub Actions",
+        "platform": "LinkedIn",
+        "issuer": "LinkedIn",
+        "url": "https://www.linkedin.com/learning/certificates/1038535e79d769cb13f05d2375f74f0b7af1936acbbbaa685bed3e48a957c8cf",
+        "year": 2023,
+        "category": "DevOps, GitHub"
+    },
+    {
+        "title":"React Native Ecosystem and Workflow",
+        "platform": "LinkedIn",
+        "issuer": "LinkedIn",
+        "year": 2023,
+        "category": "Mobile Development, React Native",
+        "url": "https://www.linkedin.com/learning/certificates/8f7825449c0aa5518c7816eb896fe30fa29ead837295ad87c41817fe26a5ab8c"
+    },
     { 
         "title": "React: Building Progressive Web Apps (PWAs)",
         "platform": "LinkedIn",
         "issuer": "LinkedIn",
         "year": 2023,
         "category": "PWAs, React",
-        "url": "https://www.linkedin.com/learning/certificates/b7bfd943eaccc7f3fed6a37ed9e503db011aefae4bc00d532cd708dc0450fe9b",
-        "filename": "react-pwa_linkedin"
+        "url": "https://www.linkedin.com/learning/certificates/b7bfd943eaccc7f3fed6a37ed9e503db011aefae4bc00d532cd708dc0450fe9b"
+    },
+    { 
+        "title": "Machine Learning with Python",
+        "platform": "Coursera",
+        "issuer": "IBM",
+        "year": 2022,
+        "url": "https://www.coursera.org/account/accomplishments/certificate/2QXJN8B3CNG2",
+        "category": "Python, Machine Learning, Jupyter, Scikit-learn, Pandas, Numpy"
     },
     {
-        "filename": "dummy.pdf",
-        "title": "A dummy title",
+        "title": "Building an Android App with Architecture Components",
+        "platform": "LinkedIn",
+        "issuer": "LinkedIn",
+        "year": 2019,
+        "category": "Android, Java",
+        "url": "https://www.linkedin.com/learning/certificates/4cdab62914d918e1a4f7120f0b2f0e08173b694b3085138f62922ef739c4e9b4?trk=backfilled_certificate"
+    },
+    {
+        "title": "Vue JS 2 Course - The Complete Guide (incl. Vue Router & Vuex)",
         "platform": "Udemy",
-        "year": 2024,
-        "category": "Dummy",
-         "filename": "dummy_udemy"
+        "year": 2019,
+        "category": "Vue.js, JavaScript"
     }
 ]

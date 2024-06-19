@@ -1,0 +1,23 @@
+[
+    {
+        "title": "Energy Languages",
+        "description": "Programming language energy measurement framework",
+        "url": "https://github.com/greensoftwarelab/Energy-Languages"
+    },
+    {
+        "title": "E-Manafa",
+        "description": "Model-based energy profiler to obtain fine-grained estimations on Android devices",
+        "url": "https://github.com/greensoftwarelab/E-MANAFA"
+   
+    },
+    {
+        "title": "PyAnaDroid",
+        "description": "Generic Execution pipeline for automating the process of analyzing and benchmarking Android applications’ performance",
+        "url": "https://github.com/greensoftwarelab/PyAnaDroid"
+    },
+    {
+        "title": "jInst",
+        "description": "Framework to perform source code instrumentation of Android apps written in Java or Kotlin",
+        "url": "https://github.com/greensoftwarelab/jInst"
+    }
+]

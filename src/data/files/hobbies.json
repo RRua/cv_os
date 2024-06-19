@@ -1,15 +1,23 @@
 [
     {
-        "name": "Sleeping", 
+        "name": "Brazilian Jiu-Jitsu", 
         "current role": "practicioner",
-        "frequency": "7x/week",
-        "description": "I love sleeping",
-        "filename": "sleeping"
+        "frequency": "2x/week"
     },
     {
-        "name": "Bird watching", 
+        "name": "Bodybuilding",
         "current role": "practicioner",
+        "frequency": "5x/week"
+    },
+    {
+        "name": "Reading",
+        "current role": "practicioner",
+        "frequency": "5x/week"
+    },
+    {
+        "name": "Football",
+        "current role": "fan",
         "frequency": "1x/week",
-        "filename": "birdwatching"
+        "past role": "practicioner"
     }
 ]
