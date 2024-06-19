@@ -21,7 +21,7 @@ const SuspendedScreen = ({onLogin}) => {
 
 const Octocat = () => {
   return (
-    <a className="octocat" href="https://github.com/RRua/terminal_cv">
+    <a className="octocat" href="https://github.com/RRua/cv_os">
       <img className="octocat" src={require('./assets/octocat.png')} alt="GitHub"></img>
     </a>);
 }
