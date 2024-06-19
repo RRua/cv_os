@@ -9,7 +9,6 @@ import {data} from './data/data.js';
 import SettingsApp from './view/apps/SettingsApp.js';
 import { STRINGS } from './constants/strings.js';
 
-
 const SuspendedScreen = ({onLogin}) => {
   return (
     <div className="suspended_screen">
@@ -60,11 +59,15 @@ function App() {
   var defaultIcons = [
     {   src: require('./assets/terminal-icon.png'),
         alt: 'Terminal',
-        onclick: () => {addApp(windowApps.length, 'Terminal', <TerminalApp fs={data}/>)}
+        onclick: () => {
+          addApp(windowApps.length, 'Terminal', <TerminalApp fs={data}/>)
+        }
     },
     {   src: require('./assets/settings-icon.png'),
       alt: 'Settings',
-      onclick: () => addApp(windowApps.length, 'Settings', <SettingsApp onShutdown={onShutdown} onSuspend={onSuspend}/>)
+      onclick: () => addApp(windowApps.length, 'Settings',
+         <SettingsApp onShutdown={onShutdown} onSuspend={onSuspend}/>
+        )
     },
     
     { src: require('./assets/pdf-icon.png'), alt: 'CV (pdf)',
@@ -72,7 +75,7 @@ function App() {
      },
     { 
       src: require('./assets/academic-icon.png'),
-      alt: 'Academic Personal Website',
+      alt: 'Personal Website',
       onclick: () => window.open(STRINGS.DOCK.PERSONAL_WEBSITE_LINK) 
     },
     {   src: require('./assets/linktree-icon.png'),
@@ -95,10 +98,7 @@ function App() {
             <Octocat></Octocat>
             <Dock icons={defaultIcons}/>
           </div>
-  
         )
     );
-
 }
-
 export default App;

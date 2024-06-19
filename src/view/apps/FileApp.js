@@ -3,7 +3,6 @@ import { STRINGS } from '../../constants/strings';
 import '../../styles/view/TextFile.css';
 import {React, useState, useEffect} from 'react';
 import Markdown from 'react-markdown'
-import { getFilesURL } from '../../utils/utils';
 
 
 const FileTopBar = ({onBackInfo, buttonInfo}) => {
@@ -44,11 +43,8 @@ function FileApp({file, buttonInfo, onBackInfo}) {
         const fetchMarkdown = async () => {
             try {
                 if(file.content.type && file.content.type === 'markdown'){
-
-                    const fp = `${getFilesURL()}/${file.content.filename}`;
-                    //console.log(fp);
+                    const fp = file.getFilePath();
                     const response = await fetch(fp);
-                    //console.log(response);
                     const text = await response.text();
                     setFileContent(text);
                 }

@@ -1,6 +1,6 @@
 {
     "title": "Contributing.md",
-    "filename": "contributing.md",
     "type": "markdown",
-    "filepath": "/data/contributing.json"
+    "filepath": "terminal_cv/data/files/contributing.md",
+    "description": "an example of a markdown file that is loaded from /data/files/contributing.md"
 }
