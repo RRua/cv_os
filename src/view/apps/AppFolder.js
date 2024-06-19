@@ -1,10 +1,11 @@
-import {React, useState} from 'react';
+import React, {useState} from 'react';
 import '../../styles/view/AppFolder.css';
 import '../../styles/view/TextFile.css';
 import FileApp from './FileApp';
 import { iconImgFromType, getFilesURL} from '../../utils/utils';
 import { Directory } from '../../data/data';
 import { STRINGS } from '../../constants/strings';
+import { AppContext } from '../../hooks/AppContext';
 
 
 class ViewType {
@@ -26,6 +27,7 @@ const Listbox = ({ options, onSelect, default_text="Select attribute"}) => {
 
     return (
         <select className='top_bar_select'
+            id="select_attribute"
             onClick={(e) => e.stopPropagation()}
             value={selectedOption} onChange={handleChange}>
             <option value="">{default_text}</option>
@@ -54,12 +56,13 @@ const FolderEntry = ({fkey, icon, name, onclick}) => {
 };
 
 
-const AppFolder = ({name, openApp, data, view_type=ViewType.List, searchBar=true}) => {
+const AppFolder = ({itemKey, name, openApp, data, view_type=ViewType.List, searchBar=true}) => {
     const [dataToShow, setDataToShow] = useState(data.content);
     const [currData, setCurrData] = useState(data);
     const [inputValue, setInputValue] = useState('');
     const [selectedOption, setSelectedOption] = useState('');
-    const [options, setOptions] = useState([]); 
+    const [options, setOptions] = useState([]);
+    const {replaceApp} = React.useContext(AppContext);
 
     const getOptionsOnData = (data) => {
         if (data.content.length === 0) {
@@ -102,8 +105,6 @@ const AppFolder = ({name, openApp, data, view_type=ViewType.List, searchBar=true
         setDataToShow(filteredData);
     }
 
-    
-
     return (
         <div className="folder_content need_interaction">
            {searchBar && 
@@ -118,8 +119,7 @@ const AppFolder = ({name, openApp, data, view_type=ViewType.List, searchBar=true
                     {STRINGS.APP_FOLDER.BACK_BUTTON}
                     </button>
                     <Listbox options={getOptionsOnData(currData)} onSelect={handleSelect} default_text={STRINGS.APP_FOLDER.SELECT_TEXT} />
-                    <input value={inputValue} type="text" placeholder={STRINGS.APP_FOLDER.SEARCH_PLACEHOLDER} onChange={handleInputChange} />
-                    {/*<button><img className='top_bar_img' src={require("../assets/search-icon.png")}></img></button>*/}
+                    <input id="search" value={inputValue} type="text" placeholder={STRINGS.APP_FOLDER.SEARCH_PLACEHOLDER} onChange={handleInputChange} />
                 </div>  
             }
             <div className="folder_content">
@@ -130,12 +130,13 @@ const AppFolder = ({name, openApp, data, view_type=ViewType.List, searchBar=true
                                 if (file instanceof Directory){
                                     setDataToShow(file.content);
                                     setCurrData(file);
-                                    openApp(file.name, file.name,
+                                    replaceApp(itemKey, file.name,
                                         <AppFolder name={file.name} openApp={openApp} 
                                         data={file}/>)
                                 }
                                 else {
-                                    openApp(file.name, file.name,
+                                   
+                                    replaceApp(itemKey, file.name,
                                         <FileApp file={file} 
                                         buttonInfo={ file.content.url? {
                                             text: STRINGS.APP_FOLDER.OPEN_BUTTON,
@@ -143,7 +144,7 @@ const AppFolder = ({name, openApp, data, view_type=ViewType.List, searchBar=true
                                         }: null}
                                         onBackInfo={{
                                             text: STRINGS.APP_FOLDER.BACK_BUTTON,
-                                            onclick: () => {openApp(name, name, <AppFolder name={name} openApp={openApp} data={currData} view_type={ViewType.List}/>)}
+                                            onclick: () => {replaceApp(itemKey, name, <AppFolder name={name} openApp={openApp} data={currData} view_type={ViewType.List}/>)}
                                         }}/>)
                                     }
                                 }}>

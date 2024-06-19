@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './styles/App.css';
-import AppWindow from './view/apps/AppWindow.js';
 import Dock from './view/dock/Dock';
 import DesktopArea from './view/desktopArea/DesktopArea.js';
 import TerminalApp from './view/apps/TerminalApp.js';
 import OpenWindowsSpace from './view/desktopArea/OpenWindowsSpace.js';
-import {data} from './data/data.js';
+
 import SettingsApp from './view/apps/SettingsApp.js';
 import { STRINGS } from './constants/strings.js';
+import { AppContext } from './hooks/AppContext';
+
 
 const SuspendedScreen = ({onLogin}) => {
   return (
@@ -22,50 +23,24 @@ const SuspendedScreen = ({onLogin}) => {
 const Octocat = () => {
   return (
     <a className="octocat" href="https://github.com/RRua/cv_os">
-      <img className="octocat" src={require('./assets/octocat.png')} alt="GitHub"></img>
+      <img className="octocat" src={require('./assets/octocat.png')} alt="GitHub repo"></img>
     </a>);
 }
 
 
 function App() {
-  const [windowApps, setWindowApps] = useState([]);
-  const [suspended, setSuspended] = useState(false);
- 
-  const addApp = (id, title, app) => {
-    const count = windowApps.length;
-    const newApp = (
-      <AppWindow key={count} itemKey={windowApps.length} title={title} onWindowClose={popApp}>
-        {app}
-      </AppWindow>
-    );
-    setWindowApps([...windowApps, newApp]);
-  }
-
-  const popApp = (_, itemKey) => {
-    setWindowApps((prevWindowApps) => {
-      return prevWindowApps.filter((window) => window.props.itemKey !== itemKey);
-    });
-  };
-
-  const onShutdown = (e) => {
-    setSuspended(true);
-    setWindowApps([]);
-  };
-
-  const onSuspend  = (e) => {
-      setSuspended(true);
-  };
+  const {state, addApp, onShutdown, onSuspend, setSuspend} = React.useContext(AppContext);
 
   var defaultIcons = [
     {   src: require('./assets/terminal-icon.png'),
         alt: 'Terminal',
         onclick: () => {
-          addApp(windowApps.length, 'Terminal', <TerminalApp fs={data}/>)
+          addApp('Terminal', <TerminalApp fs={state.fs}/>)
         }
     },
     {   src: require('./assets/settings-icon.png'),
       alt: 'Settings',
-      onclick: () => addApp(windowApps.length, 'Settings',
+      onclick: () => addApp('Settings',
          <SettingsApp onShutdown={onShutdown} onSuspend={onSuspend}/>
         )
     },
@@ -85,17 +60,16 @@ function App() {
   ];
 
   return ( 
-    suspended ? 
-      ( <div className="App">
-          <SuspendedScreen onLogin={() => setSuspended(false)}>
-          </SuspendedScreen>
-        </div>)
+    state.suspended ? 
+        ( <div className="App">
+            <SuspendedScreen onLogin={() => setSuspend(false)} />
+          </div>)
       : ( <div className="App">
-            <DesktopArea onAppOpen={addApp} data={data} />
+            <DesktopArea data={state.fs} onAppOpen={addApp}/>
             <OpenWindowsSpace>
-              {windowApps}
+              {state.windowApps}
             </OpenWindowsSpace>
-            <Octocat></Octocat>
+            <Octocat/>
             <Dock icons={defaultIcons}/>
           </div>
         )

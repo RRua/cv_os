@@ -90,7 +90,7 @@ To add new files (visually), follow these steps:
 2. Load the file into the `data.js` object (`src/data/data.js`). To do this, the `loadAppData` function must be edited to import the new file and place it in the desired hierarchy. Example:
 
     ```javascript
-    import professional_experience from './files/professional_experience.json';
+ import professional_experience from './files/professional_experience.json';
 
     function loadAppData(){
         let data = new Directory('root', null);

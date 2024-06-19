@@ -1,10 +1,11 @@
 import React from 'react';
-import { useTheme } from '../../hooks/ThemeContext.js';
 import '../../styles/view/Settings.css';
 import { STRINGS } from '../../constants/strings.js';
+import { AppContext } from '../../hooks/AppContext';
 
 function SettingsApp({onSuspend, onShutdown}) {
-    const { theme, toggleTheme } = useTheme();
+
+    const {state, toggleTheme} = React.useContext(AppContext);
 
     const handleShutdown = (e) => {
        onShutdown(e);
@@ -19,7 +20,7 @@ function SettingsApp({onSuspend, onShutdown}) {
             <div className='settings_line'>
                 <span>{STRINGS.SETTINGS.DARK_MODE}</span>
                 <label className="toggle-switch">
-                    <input type="checkbox" checked={theme === 'dark'} onChange={toggleTheme} />
+                    <input type="checkbox" checked={state.theme === 'dark'} onChange={toggleTheme} />
                     <span className="slider"></span>
                 </label>
             </div>

@@ -1,11 +1,16 @@
 import '../../styles/view/Desktop.css';
+import React from 'react';
 import DesktopIcon from './DesktopIcon';
 import AppFolder from '../apps/AppFolder';
 import FileApp from '../apps/FileApp';
 import { Directory } from '../../data/data';
 import { getFilesURL } from '../../utils/utils';
+import { AppContext } from '../../hooks/AppContext';
 
-function DesktopArea({onAppOpen, data}) {
+
+function DesktopArea({data}) {
+
+    const {addApp} = React.useContext(AppContext);
 
     const data_to_icon = (key, value) => { 
         return {   
@@ -13,13 +18,17 @@ function DesktopArea({onAppOpen, data}) {
                 name: value.name,
                 onclick: () => { 
                     if (value instanceof Directory){
-                        onAppOpen(key, key, <AppFolder name={key} openApp={onAppOpen} data={value}/>)
+                        addApp(key, 
+                            <AppFolder name={key} openApp={addApp} data={value}/>
+                        )
                     }
                     else {
-                        onAppOpen(key, key, <FileApp file={value} 
+                        addApp(key, <FileApp file={value} 
                             buttonInfo={ (value.content.url || value.content.filename)? {
                                 text: "Open",
-                                onclick: () => {window.open(value.content.url ? value.className.url : `${getFilesURL()}/${value.content.filename}`, "_blank")}
+                                onclick: () => {
+                                    window.open(value.content.url ? value.className.url 
+                                        : `${getFilesURL()}/${value.content.filename}`, "_blank")}
                                 }
                             : null
                             }/>)
@@ -29,7 +38,7 @@ function DesktopArea({onAppOpen, data}) {
     }
     return(
         <div className="desktop">
-           {data.content.map((key, index) => {
+           {data && Object.keys(data).length > 0 && data.content.map((key, index) => {
                 return <DesktopIcon key={data.content[index].name} 
                             icon={data_to_icon(data.content[index].name, key)}/>
 })}

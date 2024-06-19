@@ -12,7 +12,6 @@ export class CatCommand extends Command {
         if (res) {
             return res;
         }
-        console.log("bueanss", args);
         var new_output = [];
         for(const arg of args.slice(1)) {
             console.log(arg);

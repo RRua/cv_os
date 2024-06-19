@@ -121,7 +121,7 @@
 
 .line_tooltip {
   position: absolute;
-  top: 30%;
+  top: 10%;
   left: 80%;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.7);
@@ -130,6 +130,5 @@
   border-radius: 5px;
   font-size: 15px;
   pointer-events: none;
-  z-index: 1000;
+  z-index: 5;
 }
-
