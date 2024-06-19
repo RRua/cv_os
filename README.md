@@ -80,8 +80,8 @@ To add new files (visually), follow these steps:
     {
         "title": "Contributing.md",
         "type": "markdown",
-        "filepath": "<your_repo_name>/data/files/contributing.md", 
-        "description": "An example of a markdown file that is loaded from /data/files/contributing.md"
+        "filepath": "/data/files/contributing.md", 
+        "description": "An example of a markdown file that is loaded from public/data/files/contributing.md"
     }
     ```
 
