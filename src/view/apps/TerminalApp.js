@@ -155,6 +155,7 @@ function TerminalApp({itemKey, inputRef, onWindowClose, fs }) {
       <div className="prompt_line">
         <div className="prompt_string">{promptString}</div>
         <input
+          id="prompt_input"
           type="text"
           value={input}
           onClick={updateCursorPosition}
