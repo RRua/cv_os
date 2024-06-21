@@ -6,7 +6,7 @@ import { iconImgFromType, getFilesURL} from '../../utils/utils';
 import { Directory } from '../../data/data';
 import { STRINGS } from '../../constants/strings';
 import { AppContext } from '../../hooks/AppContext';
-
+import Listbox from '../misc/Listbox';
 
 class ViewType {
     static Grid = new ViewType("grid")
@@ -15,30 +15,6 @@ class ViewType {
       this.name = name
     }
   }
-
-const Listbox = ({ options, onSelect, default_text="Select attribute"}) => {
-    const [selectedOption, setSelectedOption] = useState('');
-    
-    const handleChange = (e) => {
-        const value = e.target.value;
-        setSelectedOption(value);
-        onSelect(value);
-    };
-
-    return (
-        <select className='top_bar_select'
-            id="select_attribute"
-            onClick={(e) => e.stopPropagation()}
-            value={selectedOption} onChange={handleChange}>
-            <option value="">{default_text}</option>
-            {options.map((option, index) => (
-                <option key={index} value={option}>
-                {option}
-                </option>
-            ))}
-        </select>
-    );
-};
 
 const FolderEntry = ({fkey, icon, name, onclick}) => {
     const [showTooltip, setShowTooltip] = useState(false);

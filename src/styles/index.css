@@ -6,6 +6,7 @@
   --text-color: #000000;
   --reverse-text-color: #ffffff;
   --window-color: rgb(209, 211, 219);
+  --background: linear-gradient(190deg, #f8e08e 0%, #f3ca82 25%, #a97367 50%, #534277 75%, #091d68 100%);
 }
 
 [data-theme='dark'] {
@@ -14,6 +15,16 @@
   --text-color: #ffffff;
   --reverse-text-color: #000000;
   --window-color: rgb(94, 94, 97);
+}
+
+[os-feel='windows'] {
+  --window-color: rgb(209, 211, 219);
+  --background: linear-gradient(90deg, #229ad6, #113c77, #14168b);
+}
+
+[os-feel='ubuntu'] {
+  --window-color: rgb(209, 211, 219);
+  --background: linear-gradient(45deg, #af3a16, #77116f, #512750, #2a001e, #5e2750, #77216f);
 }
 
 

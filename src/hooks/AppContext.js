@@ -5,12 +5,15 @@ import { data } from '../data/data.js';
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
+
   const [state, setState] = useState({
     theme: 'light',
     fs: data,
     windowApps: [],
     suspended: false,
     openWindowCount: 0,
+    isOnline: navigator.onLine,
+    os_feel: 'ubuntu'
   });
 
   useEffect(() => {
@@ -19,7 +22,30 @@ const AppProvider = ({ children }) => {
       ...prevState,
       theme: savedTheme,
     }));
+
+    const savedfeel = localStorage.getItem('os_feel') || 'macos';
+    setState((prevState) => ({
+      ...prevState,
+      os_feel: savedfeel,
+    }));
+    
     document.documentElement.setAttribute('data-theme', savedTheme);
+    // Add event listeners for network status changes
+    const updateNetworkStatus = () => {
+      setState((prevState) => ({
+        ...prevState,
+        isOnline: navigator.onLine,
+      }));
+    };
+
+    window.addEventListener('online', updateNetworkStatus);
+    window.addEventListener('offline', updateNetworkStatus);
+
+    // Cleanup event listeners on unmount
+    return () => {
+      window.removeEventListener('online', updateNetworkStatus);
+      window.removeEventListener('offline', updateNetworkStatus);
+    };
   }, []);
 
   const toggleTheme = () => {
@@ -30,6 +56,15 @@ const AppProvider = ({ children }) => {
     }));
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
+  };
+
+  const toggleFeel = (feel) => {
+    setState((prevState) => ({
+      ...prevState,
+      os_feel: feel,
+    }));
+    document.documentElement.setAttribute('os-feel', feel);
+    localStorage.setItem('os_feel', feel);
   };
 
   const setFS = (fs) => {
@@ -121,6 +156,7 @@ const AppProvider = ({ children }) => {
       value={{
         state,
         toggleTheme,
+        toggleFeel,
         setFS,
         addApp,
         popApp,

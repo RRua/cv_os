@@ -10,8 +10,7 @@
   width: 100%;
   height: 100%; 
   box-sizing: border-box;
-  pointer-events: auto; /* Allows clicks to pass through this div */
-  
+  pointer-events: auto; /* Allows clicks to pass through this div */ 
 }
 
 

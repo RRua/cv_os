@@ -1,7 +1,50 @@
 @import url('../index.css');
 
+
+
 .settings {
-    padding: 3%;
+  padding: 3%;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.settings_header {
+  padding: 5px;
+  align-items: center;
+}
+.settings_header img {
+  max-height: 70px;
+  max-width: 70px;
+  height: 10vh;
+
+}
+
+.settings_header_line {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.settings_header_line > * {
+  margin: 1px;
+}
+
+.status_circle {
+  height: 15px;
+  width: 15px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.settings_list {
     background-color: var(--background-color);
     color: var(--text-color);
     display: flex;
@@ -12,6 +55,7 @@
     justify-content: center;
     cursor: pointer;
     align-items: center;
+    border-top: 1px solid var(--text-color);
   }
 
 .settings_line {
@@ -20,7 +64,7 @@
     align-items: center;
     width: 100%;
     margin: 0.5%;
-    border: 1px solid var(--text-color);
+    border-bottom: 1px solid var(--text-color);
     border-radius: 3px;
     padding: 2%;
   }

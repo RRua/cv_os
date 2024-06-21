@@ -7,7 +7,9 @@
   width: 100vw;
   display: flex;
   color: var(--text-color);
-  background: linear-gradient(45deg, #af3a16, #77116f, #512750, #2a001e, #5e2750, #77216f);
+  /*background: linear-gradient(45deg, #af3a16, #77116f, #512750, #2a001e, #5e2750, #77216f);
+  background: linear-gradient(90deg, #229ad6, #113c77, #14168b);*/
+  background: var(--background);
   flex-direction: row;
   justify-content: center;
   align-items: center;
