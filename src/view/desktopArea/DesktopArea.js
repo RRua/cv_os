@@ -31,7 +31,8 @@ function DesktopArea({data}) {
                                         : `${getFilesURL()}/${value.content.filename}`, "_blank")}
                                 }
                             : null
-                            }/>)
+                            }
+                            />)
                     }
                 }
             }

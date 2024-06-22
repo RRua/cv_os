@@ -1,5 +1,5 @@
 
-import WindowAppBar from "./WindowAppBar";
+import {MacOsAppBar, WindowsAppBar, UbuntuAppBar} from "./WindowAppBar";
 import '../../styles/view/AppWindow.css';
 import React, { useState, useRef, cloneElement, useEffect } from 'react';
 import Draggable from 'react-draggable';
@@ -70,7 +70,7 @@ function AppWindow({itemKey, title, onWindowClose, children}) {
               style={{border: '2px solid #0000', position: 'relative', 'pointerEvents': 'auto'}}
             >
               <div ref={contentRef} className="app_window" style={{height: isMinimized? 'fit-content' : '100%'}}  onClick={handleContainerClick}>
-                  <WindowAppBar title={title} 
+                  <UbuntuAppBar title={title} 
                       onMinimize={toggleMinimize}
                       onMaximize={toggleMaximize}
                       onClose={(e) => onWindowClose(e, itemKey)}

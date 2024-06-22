@@ -32,6 +32,10 @@ function SettingsApp({onSuspend, onShutdown}) {
             </div>
             <div className="settings_list need_interaction">
                 <div className='settings_line'>
+                    <span>OS Feel</span>
+                    <Listbox options={["MacOS", "Ubuntu", "Windows"]} onSelect={(value) => {toggleFeel(value.toLowerCase())}}/>
+                </div>
+                <div className='settings_line'>
                     <span>{STRINGS.SETTINGS.DARK_MODE}</span>
                     <label className="toggle-switch">
                         <input type="checkbox" checked={state.theme === 'dark'} onChange={toggleTheme} />
