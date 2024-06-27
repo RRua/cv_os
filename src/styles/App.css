@@ -47,9 +47,10 @@
   position: fixed;
   bottom: 3px;
   left: 1px;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   transition: transform 0.3s;
+  z-index: 10;
 }
 
 .octocat:hover  {

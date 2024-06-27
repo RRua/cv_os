@@ -17,13 +17,11 @@
   --window-color: rgb(94, 94, 97);
 }
 
-[os-feel='windows'] {
-  --window-color: rgb(209, 211, 219);
+[os-feel='Windows'] {
   --background: linear-gradient(90deg, #229ad6, #113c77, #14168b);
 }
 
-[os-feel='ubuntu'] {
-  --window-color: rgb(209, 211, 219);
+[os-feel='Ubuntu'] {
   --background: linear-gradient(45deg, #af3a16, #77116f, #512750, #2a001e, #5e2750, #77216f);
 }
 

@@ -2,8 +2,9 @@ import '../../styles/view/AppFolder.css';
 import React, { useState } from 'react';
 
 const Listbox = ({ options, onSelect, default_text="Select attribute"}) => {
-    const [selectedOption, setSelectedOption] = useState('');
-    
+
+    const [selectedOption, setSelectedOption] = useState(default_text);
+
     const handleChange = (e) => {
         const value = e.target.value;
         setSelectedOption(value);
@@ -13,9 +14,9 @@ const Listbox = ({ options, onSelect, default_text="Select attribute"}) => {
     return (
         <select className='top_bar_select'
             id="select_attribute"
+            defaultValue={selectedOption}
             onClick={(e) => e.stopPropagation()}
-            value={selectedOption} onChange={handleChange}>
-            <option value="">{default_text}</option>
+            onChange={handleChange}>
             {options.map((option, index) => (
                 <option key={index} value={option}>
                 {option}

@@ -1,162 +1,133 @@
-import React, { createContext, useState, useEffect, useCallback, cloneElement} from 'react';
-import AppWindow from '../view/apps/AppWindow.js';
-import { data } from '../data/data.js';
+import React, { createContext, useEffect, useReducer, useCallback, cloneElement } from 'react';
+import AppWindow from '../view/apps/AppWindow';
+import { data } from '../data/data';
+import useNetworkStatus from '../hooks/useNetworkStatus';
+import useTheme from './useTheme';
+import useOsFeel from './useOSFeel';
 
 const AppContext = createContext();
 
-const AppProvider = ({ children }) => {
+const initialState = {
+  fs: data,
+  windowApps: [],
+  suspended: false,
+  openWindowCount: 0,
+};
 
-  const [state, setState] = useState({
-    theme: 'light',
-    fs: data,
-    windowApps: [],
-    suspended: false,
-    openWindowCount: 0,
-    isOnline: navigator.onLine,
-    os_feel: 'ubuntu'
-  });
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_THEME':
+      return { ...state, theme: action.theme };
+    case 'SET_FS':
+      return { ...state, fs: action.fs };
+    case 'ADD_APP':
+      const newApp = (
+        <AppWindow
+          key={state.openWindowCount}
+          itemKey={state.openWindowCount}
+          title={action.title}
+          onWindowClose={action.popApp}
+        >
+          {cloneElement(action.app, { ...action.app.props, windowKey: state.openWindowCount })}
+        </AppWindow>
+      );
+      return {
+        ...state,
+        windowApps: [...state.windowApps, newApp],
+        openWindowCount: state.openWindowCount + 1,
+      };
+    case 'REPLACE_APP':
+      const replacedApp = (
+        <AppWindow
+          key={action.itemKey}
+          itemKey={action.itemKey}
+          title={action.title}
+          onWindowClose={action.popApp}
+        >
+          {action.app}
+        </AppWindow>
+      );
+      const updatedApps = state.windowApps.map((window) =>
+        window.props.itemKey === action.itemKey ? replacedApp : window
+      );
+      return { ...state, windowApps: updatedApps };
+    case 'POP_APPS':
+      return { ...state, windowApps: [] };
+    case 'POP_APP':
+      const remainingApps = state.windowApps.filter((window) => window.props.itemKey !== action.itemKey);
+      return { ...state, windowApps: remainingApps };
+    case 'SET_SUSPEND':
+      return { ...state, suspended: action.suspended };
+    default:
+      return state;
+  }
+};
+
+const AppProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const isOnline = useNetworkStatus();
+  const [theme, toggleTheme] = useTheme();
+  const [feel, toggleFeel, windowFactory] = useOsFeel();
+
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setState((prevState) => ({
-      ...prevState,
-      theme: savedTheme,
-    }));
-
-    const savedfeel = localStorage.getItem('os_feel') || 'macos';
-    setState((prevState) => ({
-      ...prevState,
-      os_feel: savedfeel,
-    }));
-    
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    // Add event listeners for network status changes
-    const updateNetworkStatus = () => {
-      setState((prevState) => ({
-        ...prevState,
-        isOnline: navigator.onLine,
-      }));
-    };
-
-    window.addEventListener('online', updateNetworkStatus);
-    window.addEventListener('offline', updateNetworkStatus);
-
-    // Cleanup event listeners on unmount
-    return () => {
-      window.removeEventListener('online', updateNetworkStatus);
-      window.removeEventListener('offline', updateNetworkStatus);
-    };
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = state.theme === 'light' ? 'dark' : 'light';
-    setState((prevState) => ({
-      ...prevState,
-      theme: newTheme,
-    }));
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-  };
-
-  const toggleFeel = (feel) => {
-    setState((prevState) => ({
-      ...prevState,
-      os_feel: feel,
-    }));
-    document.documentElement.setAttribute('os-feel', feel);
-    localStorage.setItem('os_feel', feel);
-  };
+    dispatch({ type: 'SET_ONLINE_STATUS', isOnline });
+  }, [isOnline]);
 
   const setFS = (fs) => {
-    setState((prevState) => ({
-      ...prevState,
-      fs: fs,
-    }));
+    dispatch({ type: 'SET_FS', fs });
   };
 
   const addApp = (title, app) => {
-    setState((prevState) => {
-      const newApp = (
-        <AppWindow
-          key={prevState.openWindowCount}
-          itemKey={prevState.openWindowCount}
-          title={title}
-          onWindowClose={popApp}
-        >
-          {cloneElement(app, { ...app.props, windowKey: prevState.openWindowCount})}
-        </AppWindow>
-      );
-
-      return {
-        ...prevState,
-        windowApps: [...prevState.windowApps, newApp],
-        openWindowCount: prevState.openWindowCount + 1,
-      };
+    dispatch({
+      type: 'ADD_APP',
+      title,
+      app,
+      popApp,
     });
   };
 
   const replaceApp = (itemKey, title, app) => {
-    console.log('replaceApp', itemKey, title, app);
-    setState((prevState) => {
-      const newApp = (
-        <AppWindow
-          key={itemKey} // use the same key to replace the app
-          itemKey={itemKey}
-          title={title}
-          onWindowClose={popApp}
-        >
-          {app}
-        </AppWindow>
-      );
-
-      const updatedApps = prevState.windowApps.map((window) =>
-        window.props.itemKey === itemKey ? newApp : window
-      );
-
-      return {
-        ...prevState,
-        windowApps: updatedApps,
-      };
+    dispatch({
+      type: 'REPLACE_APP',
+      itemKey,
+      title,
+      app,
+      popApp,
     });
   };
 
-
-
   const popApp = useCallback((_, itemKey) => {
-    setState((prevState) => {
-      const updatedApps = prevState.windowApps.filter((window) => window.props.itemKey !== itemKey);
-      return {
-        ...prevState,
-        windowApps: updatedApps,
-      };
-    });
+    dispatch({ type: 'POP_APP', itemKey });
   }, []);
 
   const setSuspend = (suspended) => {
-    setState((prevState) => ({
-      ...prevState,
-      suspended: suspended,
-    }));
+    dispatch({ type: 'SET_SUSPEND', suspended });
   };
 
-  const onShutdown = (e) => {
+  const onShutdown = () => {
     setSuspend(true);
-    setState((prevState) => ({
-      ...prevState,
-      windowApps: [],
-    }));
+    dispatch({ type: 'POP_APPS'});
   };
 
-  const onSuspend = (e) => {
+  const onSuspend = () => {
     setSuspend(true);
+  };
+
+  const onChangeFeel = (feel) => {
+    toggleFeel(feel);
   };
 
   return (
     <AppContext.Provider
       value={{
         state,
+        isOnline,
+        theme,
+        windowFactory,
+        feel,
         toggleTheme,
-        toggleFeel,
+        onChangeFeel,
         setFS,
         addApp,
         popApp,

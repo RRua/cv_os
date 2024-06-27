@@ -1,16 +1,28 @@
 
 
-const iconImgFromType = (icon_type) => {
+const iconImgFromType = (icon_type, os_type='') => {
     switch(icon_type){
       case 'folder':
-        return require('../assets/folder-icon.png')
+        return require(`../assets/folder-icon${os_type === ''? os_type : '-' + os_type.toLowerCase()}.png`)
       default:
         return require('../assets/file-icon.png')}
 }
 
 const getFilesURL = () => {
-    return process.env.PUBLIC_URL + "/data/files";
+ 
+    return process.env.PUBLIC_URL + "/data/files"; 
+  
+    //return process.env.PUBLIC_URL + "/data/files";
 }
+
+
+const getFilesPrefix = () => {
+  if (process.env.NODE_ENV === 'development'){
+    return 'cv_os';
+  }
+  return '';
+}
+
     
 function replaceLastOccurrence(originalStr, searchStr, replaceStr) {
   const lastIndex = originalStr.lastIndexOf(searchStr);
@@ -28,4 +40,4 @@ function replaceLastOccurrence(originalStr, searchStr, replaceStr) {
   return beforeLastOccurrence + replaceStr + afterLastOccurrence;
 }
 
-export {iconImgFromType, getFilesURL, replaceLastOccurrence}
+export {iconImgFromType, getFilesURL, getFilesPrefix, replaceLastOccurrence}

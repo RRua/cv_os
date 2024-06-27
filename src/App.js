@@ -44,7 +44,6 @@ function App() {
          <SettingsApp onShutdown={onShutdown} onSuspend={onSuspend}/>
         )
     },
-    
     { src: require('./assets/pdf-icon.png'), alt: 'CV (pdf)',
       onclick: () => window.open(STRINGS.DOCK.CV_LINK) 
      },
@@ -61,18 +60,18 @@ function App() {
 
   return ( 
     state.suspended ? 
-        ( <div className="App">
-            <SuspendedScreen onLogin={() => setSuspend(false)} />
-          </div>)
-      : ( <div className="App">
-            <DesktopArea data={state.fs} onAppOpen={addApp}/>
-            <OpenWindowsSpace>
-              {state.windowApps}
-            </OpenWindowsSpace>
-            <Octocat/>
-            <Dock icons={defaultIcons}/>
-          </div>
-        )
-    );
+      ( <div className="App">
+          <SuspendedScreen onLogin={() => setSuspend(false)} />
+        </div>)
+    : ( <div className="App">
+          <DesktopArea data={state.fs} onAppOpen={addApp}/>
+          <OpenWindowsSpace>
+            {state.windowApps}
+          </OpenWindowsSpace>
+          <Octocat/>
+          <Dock icons={defaultIcons}/>
+        </div>
+      )
+  );
 }
 export default App;

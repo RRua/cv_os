@@ -28,6 +28,20 @@
     pointer-events: auto;
 }
 
+.windows_bar_header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: fit-content;
+}
+
+.windows_bar_header img{
+  max-height: 50px;
+  max-width: 50px;
+  height: 1.7vh;
+  margin: 7px 10px 7px 5px;
+}
+
 .bar_header {
     text-align: center;
     align-items: center;
@@ -49,34 +63,107 @@
     width: 20%;
     cursor: pointer;
     box-sizing: border-box;
-   width: auto; /* Adjust width based on content */
+    width: auto;
+    margin-right: 2px;
   }
 
-.bar_button {
-    width: 30%;
-    min-width: 12px;
-    min-height: 12px;
-    border-radius: 100%;
-    margin-right: 3px;
-    margin-left: 3px;
-    cursor: pointer;
+.button_disabled {
+  background-color: grey;
+  pointer-events: none;
 }
 
-.close {
+/* Mac buttons */
+
+
+.mac_button {
+  width: 30%;
+  min-width: 12px;
+  min-height: 12px;
+  border-radius: 100%;
+  margin-right: 3px;
+  margin-left: 3px;
+  cursor: pointer;
+  font-size: xx-small;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1px;
+}
+
+
+.mac_button div {
+  opacity: 0;
+}
+
+.mac_button:hover div {
+  opacity: 1;
+}
+
+.mac_button_close {
     background-color: #ff5f56;
-  }
+}
   
-  .minimize {
-    background-color: #ffbd2e;
-  }
-  
-  .disabled {
-    background-color: #838281;
-    pointer-events: none;
-  }
+.mac_button_minimize {
+  background-color: #ffbd2e;
+}
 
-  .maximize {
-    background-color: #27c93f;
-  }
+.mac_button_maximize {
+  background-color: #27c93f;
+  transform: rotate(-45deg); 
+}
 
-  
+/* Windows buttons */
+
+.windows_bar_button {
+  background-color: var(--window-color);
+  border: 1px solid var(--window-color);
+  color: var(--text-color);
+  margin: 3px;
+}
+
+.windows_bar_button:hover {
+  border: 1px solid grey;
+}
+
+.window_button_close {
+    background-color: #ff5f56;
+}
+
+.window_button_minimize {
+  background-color: #ffbd2e;
+}
+
+.window_button_maximize {
+  background-color: #27c93f;
+}
+
+
+/* Ubuntu buttons */
+
+
+.ubuntu_button {
+  width: 30%;
+  min-width: 12px;
+  min-height: 12px;
+  border-radius: 100%;
+  margin-right: 3px;
+  margin-left: 3px;
+  cursor: pointer;
+  font-size: xx-small;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1px;
+  color: var(--text-color);
+  border: 1px solid grey;
+}
+
+.ubuntu_button div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+}

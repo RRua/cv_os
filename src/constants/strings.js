@@ -17,9 +17,16 @@ export const STRINGS = {
         DARK_MODE: 'Dark Mode',
         SHUTDOWN: 'Shutdown',
         SUSPEND: 'Suspend',
+        STATUS: 'Status',
+        ONLINE: 'Online',
+        OFFLINE: 'Offline',
+        OS_FEEL:  'OS Feel',
+        DEFAULT_USERNAME: 'Guest',
+
+
     },
     SUSPENDED_SCREEN: {
-        WELCOME_MESSAGE: 'Welcome CV OS User',
+        WELCOME_MESSAGE: 'Welcome Guest',
         LOGIN_BUTTON: 'LogIn',
     },
     DOCK: {
