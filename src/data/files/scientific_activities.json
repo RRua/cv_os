@@ -15,13 +15,23 @@
         {   
             "title": "Prendinger Laboratory - Cryptocurrency Market Prediction Analysis - MOU Internship at NII, Tokyo, Japan",
             "role": "Member/Researcher"
+        },
+        {   
+            "title": "Visit to University of Brasilia - Performance Overhead of Software Tracing methods for Android applications - STSM funded by CERCIRAS",
+            "role": "Visiting Researcher"
         }
     ],
     "Reviewing": [
         {       
-            "id": "Review_QRS_2024",
+            "id": "Review_SLE_2024",
             "type": "Scientific Review",
             "event": "IEEE Conference on Software Quality, Reliability and Security (QRS)",
+            "year": "2024"
+        },
+        {       
+            "id": "Review_QRS_2024",
+            "type": "Scientific Review",
+            "event": "IEEE International Conference on Software Language Engineering (SLE AE 2024) - Artifact Evaluation",
             "year": "2024"
         },
         {   
@@ -80,6 +90,11 @@
         }
     ],
     "Talks": [
+        {
+            "title": "A large-scale empirical study on mobile performance: Energy, Run-time and Memory",
+            "event": "the 3rd Resource AWareness of Systems and Society (RAW 2024) - Past Publications Track",
+            "year": "2023"
+        },
         {
             "title": "Empirical Performance Analysis of Android applications",
             "event": "Sustrainable",
