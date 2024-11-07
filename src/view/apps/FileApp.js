@@ -44,6 +44,7 @@ function FileApp({file, buttonInfo, onBackInfo}) {
         const fetchMarkdown = async () => {
             try {
                 if(file.content.type && file.content.type === 'markdown'){
+                    //console.log(file);
                     const fp = getFilesPrefix() + file.getFilePath();
                     const response = await fetch(fp);
                     const text = await response.text();
@@ -66,12 +67,12 @@ function FileApp({file, buttonInfo, onBackInfo}) {
             <div className="file_content need_interaction">
                     {
                     (file.content.type && file.content.type === 'markdown') ?
-                    (   <div className="file_output" onMouseDown={handleMouseDown} >
-                        <Markdown on>{fileContent}</Markdown> 
+                    (   <div className="file_output" onMouseDown={handleMouseDown}>
+                            <Markdown>{fileContent}</Markdown> 
                         </div>) 
                     :
                     (
-                        <div className="file_output" onMouseDown={handleMouseDown} >
+                        <div className="file_output" onMouseDown={handleMouseDown}>
                             {Object.keys(filteredContent).map((key, index) => (
                         <p key={index} className="file_line">
                             <strong>{key}: </strong>{Array.isArray(filteredContent[key]) 

@@ -17,10 +17,7 @@ const getFilesURL = () => {
 
 
 const getFilesPrefix = () => {
-  if (process.env.NODE_ENV === 'development'){
-    return 'cv_os';
-  }
-  return '';
+  return 'cv_os';
 }
 
     
