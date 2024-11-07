@@ -27,10 +27,6 @@ function DesktopArea({data}) {
                             buttonInfo={ (value.content.url || value.content.filename)? {
                                 text: "Open",
                                 onclick: () => {
-                                    console.log("open file");
-                                    console.log(value);
-                                    const other_ret_val =  `${getFilesURL()}/${value.getFilePath()}`;
-                                    console.log(other_ret_val);
                                     window.open(value.content.url ? value.content.url 
                                         : `${getFilesURL()}/${value.getFilePath()}`, "_blank")}
                                 }

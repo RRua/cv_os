@@ -15,6 +15,9 @@ const getFilesURL = () => {
     //return process.env.PUBLIC_URL + "/data/files";
 }
 
+ const getBaseURL = () => {
+  return process.env.PUBLIC_URL;
+ }
 
 const getFilesPrefix = () => {
   return '';
@@ -37,4 +40,4 @@ function replaceLastOccurrence(originalStr, searchStr, replaceStr) {
   return beforeLastOccurrence + replaceStr + afterLastOccurrence;
 }
 
-export {iconImgFromType, getFilesURL, getFilesPrefix, replaceLastOccurrence}
+export {iconImgFromType, getFilesURL,getBaseURL, getFilesPrefix, replaceLastOccurrence}
