@@ -44,8 +44,12 @@ function FileApp({file, buttonInfo, onBackInfo}) {
         const fetchMarkdown = async () => {
             try {
                 if(file.content.type && file.content.type === 'markdown'){
-                    //console.log(file);
-                    const fp = getFilesPrefix() + file.getFilePath();
+                    console.log(file);
+                    const fpref =  getFilesPrefix();
+                    console.log(fpref);
+                    console.log(file.getFilePath());
+                    const fp = file.getFilePath();
+                    console.log(fp);
                     const response = await fetch(fp);
                     const text = await response.text();
                     setFileContent(text);

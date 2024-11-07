@@ -37,7 +37,7 @@ class File {
     }
 
     getFilePath(){
-        return this.content.url || this.content.filepath || this.content.filename;
+        return  this.content.filepath || this.content.url || this.content.filename;
     }
 
 }
